@@ -37,7 +37,7 @@ public class Main {
 		
 		
 		Scanner scan = new Scanner(System.in);
-		System.out.print("Please select stop: ");
+		System.out.print("Please select target stop: ");
 		int stopIndex = scan.nextInt();
 		StopSign userStop = stops[stopIndex];
 		
