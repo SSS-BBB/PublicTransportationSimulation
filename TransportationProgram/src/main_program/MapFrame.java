@@ -24,7 +24,7 @@ public class MapFrame extends JFrame {
 			public void run() {
 				try {
 					MapFrame frame = new MapFrame();
-					MapPanel panel = new MapPanel(new TestMap());
+					MapPanel panel = new MapPanel(new TestMap(), 4);
 					panel.setLayout(null);
 					
 					frame.add(panel);

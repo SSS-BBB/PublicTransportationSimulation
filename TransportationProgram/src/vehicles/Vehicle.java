@@ -146,11 +146,10 @@ public abstract class Vehicle {
 			// if the vehicle is close enough to some stop, then the current stop will be reset to that stop.
 			if (UsefulFunc.distanceBetweenTwoPoints(position, stop.getPosition()) <= minDistanceToStop) {
 				currentStop = stop;
+				setNextStop();
 				break;
 			}
 		}
-		
-		setNextStop();
 	}
 	
 	
@@ -305,7 +304,7 @@ public abstract class Vehicle {
 		position[1] += currentSpeed[1] * t;
 		
 		// update current stop
-		setCurrentStopFromPosition(0.1); // only reset if it's close enough
+		setCurrentStopFromPosition(averageSpeed*deltaTime); // only reset if it's close enough
 		
 	}
 	

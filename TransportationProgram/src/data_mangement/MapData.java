@@ -11,7 +11,7 @@ public class MapData {
 	
 	public void updateData() {
 		for (Vehicle vehicle : vehicles) {
-			vehicle.update(0.1);
+			vehicle.update(1);
 		}
 	}
 	

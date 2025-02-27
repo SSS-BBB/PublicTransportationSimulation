@@ -15,14 +15,13 @@ public class MapPanel extends JPanel implements Runnable {
 	
 	private MapPanel contentPane;
 	private MapData map;
-	
-	private ArrayList<JButton> iconBtnList;
+	private int mapScale; // sometimes the map is too big compared to object position, so we need mapScale to make it balance
 	
 	private Thread loop;
 	
-	public MapPanel(MapData map) {
+	public MapPanel(MapData map, int mapScale) {
 		this.map = map;
-		iconBtnList = new ArrayList<>();
+		this.mapScale = mapScale;
 	}
 	
 	@Override
@@ -60,11 +59,11 @@ public class MapPanel extends JPanel implements Runnable {
 		StopSign[] stopSignArray = map.getAllStopSigns();
 		
 		for (StopSign stop : stopSignArray) {
-			int posX = (int) stop.getPosition()[0];
-			int posY = (int) stop.getPosition()[1];
+			int posX = (int) ( stop.getPosition()[0]*mapScale );
+			int posY = (int) ( stop.getPosition()[1]*mapScale );
 			
 			g2d.setColor(Color.black);
-			g2d.fillRect(posX*40, posY*40, 10, 10);
+			g2d.fillRect(posX, posY, 10, 10);
 		}
 	}
 	
@@ -72,23 +71,12 @@ public class MapPanel extends JPanel implements Runnable {
 		Vehicle[] vehicleArray = map.getAllVehicles();
 		
 		for (Vehicle vehicle : vehicleArray) {
-			int posX = (int) vehicle.getVehiclePostion()[0];
-			int posY = (int) vehicle.getVehiclePostion()[1];
+			int posX = (int) ( vehicle.getVehiclePostion()[0]*mapScale );
+			int posY = (int) ( vehicle.getVehiclePostion()[1]*mapScale );
 			
 			g2d.setColor(Color.blue);
-			g2d.fillRect(posX*40, posY*40, 10, 10);
+			g2d.fillRect(posX, posY, 8, 15);
 		}
-	}
-	
-	public void clearIcon() {
-		// clear all icons from screen
-		StopSign[] stopSignArray = map.getAllStopSigns();
-		
-		for (JButton iconBtn : iconBtnList) {
-			remove(iconBtn);
-		}
-		
-		iconBtnList.removeAll(iconBtnList);
 	}
 	
 }
