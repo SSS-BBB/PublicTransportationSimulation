@@ -300,11 +300,29 @@ public abstract class Vehicle {
 		position[1] += (nextStop.getPosition()[1] - position[1]) * t;
 		*/
 		
+		double prevPos[] = new double[2]; // position before being updated
+		prevPos[0] = position[0];
+		prevPos[1] = position[1];
+		
 		position[0] += currentSpeed[0] * t;
 		position[1] += currentSpeed[1] * t;
 		
 		// update current stop
-		setCurrentStopFromPosition(averageSpeed*deltaTime); // only reset if it's close enough
+		// calculate the distance between the travel line and the stop
+		// double a = position[1] - prevPos[1];
+		// double b = prevPos[0] - position[0];
+		// double c = (position[0]-prevPos[0])*position[1] - (position[1]-prevPos[1])*position[0];
+		// double traveledLineDist = Math.abs(a*nextStop.getPosition()[0] + b*nextStop.getPosition()[1] + c) / Math.sqrt(a*a + b*b);
+		
+		// only reset if it's close enough
+		if (UsefulFunc.distanceBetweenTwoPoints(position, nextStop.getPosition()) <= averageSpeed*deltaTime) {
+			int nextStopIndex = getStopIndex(nextStop);
+			currentStop = stops[nextStopIndex];
+			System.out.println("Update Stop");
+			setNextStop();
+		}
+		
+		// setCurrentStopFromPosition(averageSpeed*deltaTime);
 		
 	}
 	
