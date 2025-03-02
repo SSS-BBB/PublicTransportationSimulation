@@ -289,40 +289,39 @@ public abstract class Vehicle {
 		
 		// update speed
 		Random rand = new Random();
-		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
 		// speed will not be the same all the time, so there might be some random increase or decrease of speed
-		currentSpeed[0] +=  (2*rand.nextDouble() - 1) * rand.nextDouble();
-		currentSpeed[1] +=  (2*rand.nextDouble() - 1) * rand.nextDouble();
+		double randVelocity = 2*rand.nextDouble() * averageSpeed;
+		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), randVelocity);
+		
+		// current stop update analysis
+		double[] nextPos = new double[2];
+		nextPos[0] = position[0] + currentSpeed[0]*t;
+		nextPos[1] = position[1] + currentSpeed[1]*t;
 		
 		// update position
-		/*
-		position[0] += (nextStop.getPosition()[0] - position[0]) * t;
-		position[1] += (nextStop.getPosition()[1] - position[1]) * t;
-		*/
-		
-		double prevPos[] = new double[2]; // position before being updated
-		prevPos[0] = position[0];
-		prevPos[1] = position[1];
-		
-		position[0] += currentSpeed[0] * t;
-		position[1] += currentSpeed[1] * t;
-		
-		// update current stop
-		// calculate the distance between the travel line and the stop
-		// double a = position[1] - prevPos[1];
-		// double b = prevPos[0] - position[0];
-		// double c = (position[0]-prevPos[0])*position[1] - (position[1]-prevPos[1])*position[0];
-		// double traveledLineDist = Math.abs(a*nextStop.getPosition()[0] + b*nextStop.getPosition()[1] + c) / Math.sqrt(a*a + b*b);
-		
-		// only reset if it's close enough
-		if (UsefulFunc.distanceBetweenTwoPoints(position, nextStop.getPosition()) <= averageSpeed*deltaTime) {
+		if (UsefulFunc.distanceBetweenTwoPoints(position, nextPos) < UsefulFunc.distanceBetweenTwoPoints(position, nextStop.getPosition())) {
+			// if distance between current point and point in the future is less than distance between current point and the next stop
+			position[0] = nextPos[0];
+			position[1] = nextPos[1];
+		}
+		else {
+			// if distance between current point and point in the future is bigger or equal to distance between current point and the next stop
+			position[0] = nextStop.getPosition()[0];
+			position[1] = nextStop.getPosition()[1];
+			
+			// update current stop
 			int nextStopIndex = getStopIndex(nextStop);
 			currentStop = stops[nextStopIndex];
 			System.out.println("Update Stop");
 			setNextStop();
 		}
 		
-		// setCurrentStopFromPosition(averageSpeed*deltaTime);
+		// only reset if it's close enough
+		/*
+		if (UsefulFunc.distanceBetweenTwoPoints(position, nextStop.getPosition()) <= averageSpeed*deltaTime) {
+			
+		}
+		*/
 		
 	}
 	
