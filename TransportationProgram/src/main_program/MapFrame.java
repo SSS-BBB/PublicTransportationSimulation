@@ -1,8 +1,10 @@
 package main_program;
 
 import java.awt.Color;
+
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -13,7 +15,7 @@ import stops.*;
 import vehicles.*;
 
 public class MapFrame extends JFrame {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -23,13 +25,18 @@ public class MapFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					// Set frame
 					MapFrame frame = new MapFrame();
-					MapPanel panel = new MapPanel(new TestMap(), 4);
+					
+					// Set map
+					MapData testMap = new TestMap();
+					
+					// Set panel
+					MapPanel panel = new MapPanel(testMap, frame, 4);
 					panel.setLayout(null);
-					
 					frame.add(panel);
-					frame.setVisible(true);
 					
+					frame.setVisible(true);
 					panel.startLoop();
 				} catch (Exception e) {
 					e.printStackTrace();

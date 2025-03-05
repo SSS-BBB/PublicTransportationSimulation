@@ -159,6 +159,10 @@ public abstract class Vehicle {
 		return vehicleName;
 	}
 	
+	public String getVehicleLicence() {
+		return vehicleLicence;
+	}
+	
 	public double getAverageSpeed() {
 		return averageSpeed;
 	}
@@ -276,6 +280,18 @@ public abstract class Vehicle {
 		return time;
 	}
 	
+	public String departOrArrive(StopSign targetStop) {
+		int currentStopIndex = getStopIndex(currentStop);
+		int targetStopIndex = getStopIndex(targetStop);
+		
+		if ( (targetStopIndex - currentStopIndex) > 0 == forward ) {
+			return "Arriving";
+		}
+		
+		return "Departing";
+		
+	}
+	
 	public void update(double deltaTime) {
 		
 		// check if the vehicle is waiting
@@ -312,7 +328,7 @@ public abstract class Vehicle {
 			// update current stop
 			int nextStopIndex = getStopIndex(nextStop);
 			currentStop = stops[nextStopIndex];
-			System.out.println("Update Stop");
+			// System.out.println("Update Stop");
 			setNextStop();
 		}
 		
