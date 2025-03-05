@@ -1,6 +1,7 @@
 package main_program;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 import vehicles.*;
 import stops.*;
@@ -19,12 +20,17 @@ public class BusStopDetailFrame extends JFrame {
 		
 		// Frame default settings
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600, 900);
+		setSize(600, 800);
 		setLocationRelativeTo(null);
 		
 		// Set Panel
 		BusStopDetailPanel busStopPanel = new BusStopDetailPanel(this, map, vehicleList, selectedStop);
 		add(busStopPanel);
+		
+		// Scroll Pane
+		JScrollPane scrollPane = new JScrollPane(busStopPanel);
+		busStopPanel.setAutoscrolls(true);
+		add(scrollPane);
 		
 		// Show Frame
 		setVisible(true);
