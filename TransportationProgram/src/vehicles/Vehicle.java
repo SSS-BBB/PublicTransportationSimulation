@@ -15,7 +15,8 @@ public abstract class Vehicle {
 	protected StopSign currentStop;
 	protected StopSign nextStop;
 	
-	protected boolean forward; // direction of the bus going either forward(first -last) or backward(last - first)
+	protected boolean forward; // direction of the vehicle going either forward(first -last) or backward(last - first)
+	protected boolean showRoute; // whether to show the vehicle route
 	protected double averageSpeed;
 	protected double waitInterval; // how long does it take for the vehicle to start driving when it just arrives at the 0th stop
 	protected double waiting; // time left before driver starts driving again
@@ -58,6 +59,7 @@ public abstract class Vehicle {
 		setWaitingTime();
 		
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
+		showRoute = false;
 	}
 	
 	public Vehicle(String vehicleName, String vehicleLicence, StopSign[] stops, 
@@ -84,7 +86,7 @@ public abstract class Vehicle {
 		setWaitingTime();
 		
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
-		
+		showRoute = false;
 	}
 	
 	protected void setWaitingTime() {
@@ -179,8 +181,20 @@ public abstract class Vehicle {
 		return position;
 	}
 	
+	public StopSign[] getVehicleStops() {
+		return stops;
+	}
+	
 	public StopSign getNextStop() {
 		return nextStop;
+	}
+	
+	public boolean isShowRoute() {
+		return showRoute;
+	}
+	
+	public void updateShowRouteStatus(boolean status) {
+		showRoute = status;
 	}
 	
 	protected double distanceAccumulated(int from, int to) {

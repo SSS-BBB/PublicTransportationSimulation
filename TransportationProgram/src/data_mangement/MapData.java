@@ -23,4 +23,14 @@ public class MapData {
 		return vehicles;
 	}
 	
+	public Vehicle toggleVehicleShowRouteStatus(String vehicleLicense) {
+		for (Vehicle vehicle : vehicles) {
+			if (vehicle.getVehicleLicence().equals(vehicleLicense)) {
+				vehicle.updateShowRouteStatus(!vehicle.isShowRoute()); // toggle true -> false, false -> true
+				return vehicle;
+			}
+		}
+		return null;
+	}
+	
 }

@@ -105,6 +105,25 @@ public class MapPanel extends JPanel implements Runnable {
 			
 			g2d.setColor(Color.blue);
 			g2d.fillRect(posX, posY, 8, 15);
+			
+			if (vehicle.isShowRoute()) {
+				// show route of the vehicle
+				StopSign[] vehicleStops = vehicle.getVehicleStops();
+				for (int i = 0; i < vehicleStops.length - 1; i++) {
+					// Stop and Next Stop
+					StopSign stop = vehicleStops[i];
+					StopSign nextStop = vehicleStops[i + 1];
+					
+					// Positions
+					int x1 = (int) ( stop.getPosition()[0]*mapScale );
+					int y1 = (int) ( stop.getPosition()[1]*mapScale );
+					int x2 = (int) ( nextStop.getPosition()[0]*mapScale );
+					int y2 = (int) ( nextStop.getPosition()[1]*mapScale );
+					
+					g2d.setColor(Color.black);
+					g2d.drawLine(x1, y1, x2, y2);
+				}
+			}
 		}
 	}
 	

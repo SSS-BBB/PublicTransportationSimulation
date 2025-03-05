@@ -77,7 +77,7 @@ public class BusStopDetailPanel extends JPanel  {
 		// Vehicle panels
 		vehicleContainer = new JPanel[vehicleList.length];
 		
-		// Set label
+		// Set components
 		namelb = new JLabel[vehicleList.length];
 		licenselb = new JLabel[vehicleList.length];
 		vehicleStoplb = new JLabel[vehicleList.length];
@@ -87,6 +87,9 @@ public class BusStopDetailPanel extends JPanel  {
 		etalb = new JLabel[vehicleList.length];
 		departorarrivelb = new JLabel[vehicleList.length];
 		for (int i = 0; i < vehicleList.length; i++) {
+			if (vehicleList[i].getStopIndex(selectedStop) == -1)
+				continue; // This vehicle doesn't pass this stop
+			
 			vehicleContainer[i] = createVehiclePanel(vehicleList[i], i);
 			vehicleContainer[i].setAlignmentX(CENTER_ALIGNMENT);
 			add(vehicleContainer[i]);
@@ -147,6 +150,20 @@ public class BusStopDetailPanel extends JPanel  {
 		etalb[i] = new JLabel(String.format("ETA: %.2f", vehicle.getEstimatedTime(selectedStop)));
 		etalb[i].setFont(detailFont);
 		vehiclePanel.add(etalb[i]);
+		
+		// More info button
+		JButton moreBtn = new JButton("More");
+		moreBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == moreBtn) {
+					new VehicleDetailFrame(map, vehicleList, selectedStop, vehicle);
+					detailFrame.dispose();
+				}
+			}
+		});
+		
+		vehiclePanel.add(moreBtn);
 		
 		// Padding within the panel
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, 15))); // Bottom
