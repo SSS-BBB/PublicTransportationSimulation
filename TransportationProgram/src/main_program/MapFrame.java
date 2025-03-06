@@ -3,7 +3,10 @@ package main_program;
 import java.awt.Color;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
@@ -32,12 +35,18 @@ public class MapFrame extends JFrame {
 					MapData testMap = new TestMap();
 					
 					// Set panel
-					MapPanel panel = new MapPanel(testMap, frame, 4);
-					panel.setLayout(null);
-					frame.add(panel);
+					JPanel containerPanel = new JPanel();
+					containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));
+					
+					MapPanel mapPanel = new MapPanel(testMap, frame, 4);
+					mapPanel.setLayout(null);
+					containerPanel.add(mapPanel);
+					
+					frame.add(containerPanel);
 					
 					frame.setVisible(true);
-					panel.startLoop();
+					
+					mapPanel.startLoop();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

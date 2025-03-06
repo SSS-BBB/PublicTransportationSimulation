@@ -1,7 +1,7 @@
 package main_program;
 
 import java.awt.Color;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -26,15 +26,20 @@ public class MapPanel extends JPanel implements Runnable {
 	
 	private int[][] stopSignMapPositions;
 	
+	private int[] backBtnPos; // (x, y)
+	private int[] backBtnSize; // (width, height)
+	
 	public MapPanel(MapData map, MapFrame mapFrame, int mapScale) {
 		this.map = map;
 		this.mapFrame = mapFrame;
 		this.mapScale = mapScale;
+		this.backBtnPos = new int[] {0, 0};
+		this.backBtnSize = new int[] {50, 20};
 		setStopSignMapPos();
 		
 		this.stopClickListener = new StopClickListener(this);
 		addMouseListener(this.stopClickListener);
-		}
+	}
 	
 	@Override
 	public void run() {
@@ -60,6 +65,7 @@ public class MapPanel extends JPanel implements Runnable {
 		
 		setStopSignIcon(g2d);
 		setVehicleIcon(g2d);
+		setBackBtn(g2d);
 		
 		g2d.dispose();
 	}
@@ -72,6 +78,8 @@ public class MapPanel extends JPanel implements Runnable {
 	
 	public void stopLoop() {
 		loopStop = true;
+		if (mapFrame.isActive())
+			mapFrame.dispose();
 	}
 	
 	public void setStopSignMapPos() {
@@ -87,10 +95,16 @@ public class MapPanel extends JPanel implements Runnable {
 		}
 	}
 	
+	public void setBackBtn(Graphics2D g2d) {
+		// TODO: add back icon
+		g2d.setColor(Color.gray);
+		g2d.fillRect(backBtnPos[0], backBtnPos[1], backBtnSize[0], backBtnSize[1]);
+	}
+	
 	public void setStopSignIcon(Graphics2D g2d) {
 		
 		for (int i = 0; i < stopSignMapPositions.length; i++) {
-			
+			// TODO: add stop sign icon
 			g2d.setColor(Color.black);
 			g2d.fillRect(stopSignMapPositions[i][0], stopSignMapPositions[i][1], 10, 10);
 		}
@@ -108,6 +122,7 @@ public class MapPanel extends JPanel implements Runnable {
 			int posX = (int) ( vehicle.getVehiclePostion()[0]*mapScale );
 			int posY = (int) ( vehicle.getVehiclePostion()[1]*mapScale );
 			
+			// TODO: add vehicle icon
 			g2d.setColor(Color.blue);
 			g2d.fillRect(posX, posY, 8, 15);
 			
@@ -134,6 +149,14 @@ public class MapPanel extends JPanel implements Runnable {
 	
 	public int[][] getStopSignMapPos() {
 		return stopSignMapPositions;
+	}
+	
+	public int[] getBackBtnPos() {
+		return backBtnPos;
+	}
+	
+	public int[] getBackBtnSize() {
+		return backBtnSize;
 	}
 	
 	public MapFrame getMapFrame() {
