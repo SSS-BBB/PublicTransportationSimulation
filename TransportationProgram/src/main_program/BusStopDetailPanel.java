@@ -24,6 +24,8 @@ public class BusStopDetailPanel extends JPanel  {
 	
 	public BusStopDetailPanel(BusStopDetailFrame detailFrame, MapData map, Vehicle[] vehicleList, StopSign selectedStop) {
 		
+		// TODO: color this window
+		
 		// Value Setting
 		this.detailFrame = detailFrame;
 		this.map = map;
@@ -34,6 +36,8 @@ public class BusStopDetailPanel extends JPanel  {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		// Back Button
+		JPanel backContainer = new JPanel();
+		backContainer.setLayout(new BoxLayout(backContainer, BoxLayout.X_AXIS));
 		JButton backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 
@@ -63,17 +67,29 @@ public class BusStopDetailPanel extends JPanel  {
 			
 		});
 		// TODO: Back Button To the top left corner
-		backBtn.setAlignmentX(CENTER_ALIGNMENT);
-		add(backBtn);
+		backContainer.add(backBtn);
+		backContainer.add(Box.createHorizontalGlue());
+		
+		add(backContainer);
 		
 		// Stop Sign Detail
+		JLabel stopNamelb = new JLabel(selectedStop.getStopName() + " Stop");
+		stopNamelb.setAlignmentX(CENTER_ALIGNMENT);
+		stopNamelb.setFont(new Font("Tahoma", Font.BOLD, 42));
+		add(stopNamelb);
+		
 		JLabel stopIdlb = new JLabel(selectedStop.getStopID());
 		stopIdlb.setAlignmentX(CENTER_ALIGNMENT);
+		stopIdlb.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		add(stopIdlb);
 		
+		// For Debug Purpose
 		JLabel stopPoslb = new JLabel(String.format("Bus Stop Position: (%.2f, %.2f)", selectedStop.getPosition()[0], selectedStop.getPosition()[1]));
 		stopPoslb.setAlignmentX(CENTER_ALIGNMENT);
 		add(stopPoslb);
+		// TODO: Remove this before deploy
+		
+		add(Box.createRigidArea(new Dimension(0, 35)));
 		
 		// Vehicle panels
 		vehicleContainer = new JPanel[vehicleList.length];
@@ -96,7 +112,7 @@ public class BusStopDetailPanel extends JPanel  {
 			add(vehicleContainer[i]);
 			
 			// Padding
-	        add(Box.createRigidArea(new Dimension(0, 20)));
+	        add(Box.createRigidArea(new Dimension(0, 25)));
 		}
 	}
 	
@@ -104,6 +120,7 @@ public class BusStopDetailPanel extends JPanel  {
 		// Vehicle Container Panel (BoxLayout(X_AXIS))
 		JPanel containerPanel = new JPanel();
 		containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.X_AXIS));
+		// containerPanel.setBackground(Color.blue);
 		
 		// Border
 		containerPanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
@@ -111,16 +128,70 @@ public class BusStopDetailPanel extends JPanel  {
 		// Detail Panel
 		JPanel vehiclePanel = new JPanel();
 		vehiclePanel.setLayout(new BoxLayout(vehiclePanel, BoxLayout.Y_AXIS));
+		// vehiclePanel.setBackground(Color.blue);
 		
-		// Label Decoration
-		Font topicFont = new Font("Tahoma", Font.BOLD, 20); // font for vehicle name
-		Font detailFont = new Font("Tahoma", Font.PLAIN, 16); // font for vehicle detail
+		// Decorations
+		Font topicFont = new Font("Tahoma", Font.BOLD, 30); // font for vehicle name
+		Font subHeadingFont = new Font("Tahoma", Font.PLAIN, 18); // font for license, route
+		Font detailFont = new Font("Tahoma", Font.PLAIN, 14); // font for vehicle detail
+		int margin = 5; // margin between components within the vehicle panel
+		int spacing = 15; // space to separate between group
 		
 		// Padding within the panel
 		containerPanel.add(Box.createRigidArea(new Dimension(15, 0))); // Left
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, 15))); // Top
 		
 		// Components
+		
+		// Labels
+		namelb[i] = new JLabel(vehicle.getVehicleName());
+		namelb[i].setFont(topicFont);
+		vehiclePanel.add(namelb[i]);
+		
+		// TODO: add from(first or last stop) -> to(last or first stop)
+		JLabel routelb = new JLabel(String.format("%s -> %s", vehicle.getFrom().getStopName(), vehicle.getTo().getStopName()));
+		routelb.setFont(subHeadingFont);
+		vehiclePanel.add(routelb);
+		
+		licenselb[i] = new JLabel(vehicle.getVehicleLicence());
+		licenselb[i].setFont(subHeadingFont);
+		vehiclePanel.add(licenselb[i]);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
+		
+		poslb[i] = new JLabel(String.format("Vehicle Positions: (%.2f, %.2f)", vehicle.getVehiclePostion()[0], vehicle.getVehiclePostion()[1]));
+		poslb[i].setFont(detailFont);
+		vehiclePanel.add(poslb[i]);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
+		
+		vehicleStoplb[i] = new JLabel(String.format("Current stop %s", vehicle.getCurrentStop().getStopName()));
+		vehicleStoplb[i].setFont(detailFont);
+		vehiclePanel.add(vehicleStoplb[i]);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
+		
+		JLabel nextStoplb = new JLabel(String.format("Next stop %s", vehicle.getNextStop().getStopName()));
+		nextStoplb.setFont(detailFont);
+		vehiclePanel.add(nextStoplb);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
+		
+		directionlb[i] = new JLabel(String.format("Vehicle is heading %s", vehicle.vehicleDirection()));
+		directionlb[i].setFont(detailFont);
+		vehiclePanel.add(directionlb[i]);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
+		
+		departorarrivelb[i] = new JLabel(String.format("Vehicle is %s", vehicle.departOrArrive(selectedStop)));
+		departorarrivelb[i].setFont(detailFont);
+		vehiclePanel.add(departorarrivelb[i]);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
+		
+		distlb[i] = new JLabel(String.format("Distance: %.2f", vehicle.distanceToTargetStop(selectedStop)));
+		distlb[i].setFont(detailFont);
+		vehiclePanel.add(distlb[i]);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
+		
+		etalb[i] = new JLabel(String.format("ETA: %.2f", vehicle.getEstimatedTime(selectedStop)));
+		etalb[i].setFont(detailFont);
+		vehiclePanel.add(etalb[i]);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
 		// Vehicle setting button
 		JButton settingBtn = new JButton("Setting");
@@ -133,51 +204,14 @@ public class BusStopDetailPanel extends JPanel  {
 			}
 		}
 		});
-		// TODO: Setting Button To the top right corner
-		// settingBtn.setAlignmentX(LEFT_ALIGNMENT);
 		vehiclePanel.add(settingBtn);
-		
-		// Labels
-		namelb[i] = new JLabel(vehicle.getVehicleName());
-		namelb[i].setFont(topicFont);
-		vehiclePanel.add(namelb[i]);
-		
-		licenselb[i] = new JLabel(vehicle.getVehicleLicence());
-		licenselb[i].setFont(detailFont);
-		vehiclePanel.add(licenselb[i]);
-		
-		vehicleStoplb[i] = new JLabel(String.format("Vehicle is at %s", vehicle.getCurrentStop().getStopName()));
-		vehicleStoplb[i].setFont(detailFont);
-		vehiclePanel.add(vehicleStoplb[i]);
-		
-		directionlb[i] = new JLabel(String.format("Vehicle is heading %s", vehicle.vehicleDirection()));
-		directionlb[i].setFont(detailFont);
-		vehiclePanel.add(directionlb[i]);
-		
-		departorarrivelb[i] = new JLabel(String.format("Vehicle is %s", vehicle.departOrArrive(selectedStop)));
-		departorarrivelb[i].setFont(detailFont);
-		vehiclePanel.add(departorarrivelb[i]);
-		
-		poslb[i] = new JLabel(String.format("Vehicle Positions: (%.2f, %.2f)", vehicle.getVehiclePostion()[0], vehicle.getVehiclePostion()[1]));
-		poslb[i].setFont(detailFont);
-		vehiclePanel.add(poslb[i]);
-		
-		distlb[i] = new JLabel(String.format("Distance: %.2f", vehicle.distanceToTargetStop(selectedStop)));
-		distlb[i].setFont(detailFont);
-		vehiclePanel.add(distlb[i]);
-		
-		etalb[i] = new JLabel(String.format("ETA: %.2f", vehicle.getEstimatedTime(selectedStop)));
-		etalb[i].setFont(detailFont);
-		vehiclePanel.add(etalb[i]);
 		
 		// Padding within the panel
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, 15))); // Bottom
 		
-		containerPanel.add(vehiclePanel); // Center
+		containerPanel.add(vehiclePanel);
 		
 		containerPanel.add(Box.createRigidArea(new Dimension(15, 0))); // Right
-		
-		System.out.println("Label Created"); // TODO: Remove
 		
 		return containerPanel;
 	}

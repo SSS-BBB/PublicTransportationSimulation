@@ -205,6 +205,22 @@ public abstract class Vehicle {
 		showVehicle = status;
 	}
 	
+	public StopSign getFrom() {
+		// at which stop the vehicle came from
+		if (forward)
+			return stops[0];
+		
+		return stops[stops.length - 1];
+	}
+	
+	public StopSign getTo() {
+		// at which stop the vehicle will go to
+		if (forward)
+			return stops[stops.length - 1];
+		
+		return stops[0];
+	}
+	
 	protected double distanceAccumulated(int from, int to) {
 		// accumulate the distance from the stopDistance array
 		if (to >= stops.length) return 0.0;

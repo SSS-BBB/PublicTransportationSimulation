@@ -49,6 +49,8 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		showVehicleToggleBtn.addActionListener(this);
 		add(showVehicleToggleBtn);
 		
+		// TODO: add show only this vehicle when clicked go back to map and only show selected vehicle
+		
 		
 		backBtn = new JButton("Back");
 		backBtn.addActionListener(this);
