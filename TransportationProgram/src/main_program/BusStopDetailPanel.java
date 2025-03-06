@@ -66,7 +66,17 @@ public class BusStopDetailPanel extends JPanel  {
 			}
 			
 		});
-		// TODO: Back Button To the top left corner
+		// set back button icon
+		ImageIcon backIcon = new ImageIcon(getClass().getResource("/icons/backArrowIcon.png"));
+		Image backImg = backIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+		if (backIcon != null) {
+			backBtn.setIcon(new ImageIcon(backImg));
+			backBtn.setText("");
+			backBtn.setBackground(null);
+			backBtn.setBorder(null);
+			backBtn.setContentAreaFilled(false);
+		}
+		backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		backContainer.add(backBtn);
 		backContainer.add(Box.createHorizontalGlue());
 		
@@ -148,7 +158,6 @@ public class BusStopDetailPanel extends JPanel  {
 		namelb[i].setFont(topicFont);
 		vehiclePanel.add(namelb[i]);
 		
-		// TODO: add from(first or last stop) -> to(last or first stop)
 		JLabel routelb = new JLabel(String.format("%s -> %s", vehicle.getFrom().getStopName(), vehicle.getTo().getStopName()));
 		routelb.setFont(subHeadingFont);
 		vehiclePanel.add(routelb);
@@ -204,7 +213,21 @@ public class BusStopDetailPanel extends JPanel  {
 			}
 		}
 		});
+		ImageIcon settingIcon = new ImageIcon(getClass().getResource("/icons/settingIcon.png"));
+		if (settingIcon != null) {
+			Image settingImg = settingIcon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+			settingBtn.setIcon(new ImageIcon(settingImg));
+			settingBtn.setText("");
+			settingBtn.setBackground(null);
+			settingBtn.setBorder(null);
+			settingBtn.setContentAreaFilled(false);
+			
+		}
+		settingBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		vehiclePanel.add(settingBtn);
+		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
+		
+		// TODO: add vehicle image 
 		
 		// Padding within the panel
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, 15))); // Bottom

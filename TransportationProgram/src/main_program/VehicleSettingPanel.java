@@ -1,7 +1,9 @@
 package main_program;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -30,6 +32,16 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		backBtnContainer.setLayout(new BoxLayout(backBtnContainer, BoxLayout.X_AXIS));
 		backBtn = new JButton("Back");
 		backBtn.addActionListener(this);
+		ImageIcon backIcon = new ImageIcon(getClass().getResource("/icons/backArrowIcon.png"));
+		Image backImg = backIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+		if (backIcon != null) {
+			backBtn.setIcon(new ImageIcon(backImg));
+			backBtn.setText("");
+			backBtn.setBackground(null);
+			backBtn.setBorder(null);
+			backBtn.setContentAreaFilled(false);
+		}
+		backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		backBtnContainer.add(backBtn);
 		backBtnContainer.add(Box.createHorizontalGlue());
 		add(backBtnContainer);
@@ -43,6 +55,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		
 		// Margin
 		int margin = 15; // margin between components within the vehicle setting container
+		// TODO: spacing
 		
 		// Fonts
 		Font topicFont = new Font("Tahoma", Font.BOLD, 42); // font for vehicle name
@@ -60,6 +73,11 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		licenselb.setFont(subHeadingFont);
 		vehicleSettingContainer.add(licenselb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+		
+		// TODO: add 2 jcombox to select from station and the other one select to station in order to calculate the fee
+		// also add 1 button to calculate
+		
+		// TODO: add fee label to show the calculated fee
 		
 		showRoutelb = new JLabel(String.format("Show route of this vehicle on the map: %s", 
 										selectedVehicle.doShowRoute() ? "Yes": "No"));

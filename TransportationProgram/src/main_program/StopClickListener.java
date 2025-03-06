@@ -26,7 +26,7 @@ public class StopClickListener implements MouseListener {
 			double[] stopPosConvert = new double[] { allStopSignPos[i][0], allStopSignPos[i][1] };
 			
 			// Stop Sign Clicked
-			if (UsefulFunc.distanceBetweenTwoPoints(mousePos, stopPosConvert) < 10) {
+			if (UsefulFunc.distanceBetweenTwoPoints(mousePos, stopPosConvert) < 20) {
 				panel.getMapFrame().dispose();
 				panel.stopLoop();
 				new BusStopDetailFrame(panel.getMap(), panel.getVehicleList(), panel.getStopSignList()[i]);

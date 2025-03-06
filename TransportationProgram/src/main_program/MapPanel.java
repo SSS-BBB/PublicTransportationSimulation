@@ -2,9 +2,12 @@ package main_program;
 
 import java.awt.Color;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.awt.*;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -34,7 +37,7 @@ public class MapPanel extends JPanel implements Runnable {
 		this.mapFrame = mapFrame;
 		this.mapScale = mapScale;
 		this.backBtnPos = new int[] {0, 0};
-		this.backBtnSize = new int[] {50, 20};
+		this.backBtnSize = new int[] {40, 40};
 		setStopSignMapPos();
 		
 		this.stopClickListener = new StopClickListener(this);
@@ -97,16 +100,36 @@ public class MapPanel extends JPanel implements Runnable {
 	
 	public void setBackBtn(Graphics2D g2d) {
 		// TODO: add back icon
-		g2d.setColor(Color.gray);
-		g2d.fillRect(backBtnPos[0], backBtnPos[1], backBtnSize[0], backBtnSize[1]);
+		BufferedImage backIcon = null;
+		try {
+			backIcon = ImageIO.read(getClass().getResourceAsStream("/icons/backArrowIcon.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if (backIcon != null) {
+			g2d.drawImage(backIcon, backBtnPos[0], backBtnPos[1], backBtnSize[0], backBtnSize[1], null);
+		}
+		else {
+			g2d.setColor(Color.gray);
+			g2d.fillRect(backBtnPos[0], backBtnPos[1], backBtnSize[0], backBtnSize[1]);
+		}
 	}
 	
 	public void setStopSignIcon(Graphics2D g2d) {
 		
 		for (int i = 0; i < stopSignMapPositions.length; i++) {
-			// TODO: add stop sign icon
-			g2d.setColor(Color.black);
-			g2d.fillRect(stopSignMapPositions[i][0], stopSignMapPositions[i][1], 10, 10);
+			StopSign[] stopSignArray = map.getAllStopSigns();
+			
+			if (stopSignArray[i].getSignIcon() != null) {
+				g2d.drawImage(stopSignArray[i].getSignIcon(), 
+						stopSignMapPositions[i][0], stopSignMapPositions[i][1], 
+						20, 20, null);
+			}
+			else {
+				g2d.setColor(Color.black);
+				g2d.fillRect(stopSignMapPositions[i][0], stopSignMapPositions[i][1], 10, 10);
+			}
 		}
 	}
 	
@@ -115,16 +138,19 @@ public class MapPanel extends JPanel implements Runnable {
 		
 		for (Vehicle vehicle : vehicleArray) {
 			
-			if (!vehicle.doShowVehicle()) {
+			if (vehicle.doShowVehicle()) {
 				// skip this vehicle if show vehicle is false
-				continue;
+				int posX = (int) ( vehicle.getVehiclePostion()[0]*mapScale );
+				int posY = (int) ( vehicle.getVehiclePostion()[1]*mapScale );
+				
+				if (vehicle.getVehicleImage() != null) {
+					g2d.drawImage(vehicle.getVehicleImage(), posX, posY, 20, 20, null);				
+				}
+				else {
+					g2d.setColor(Color.blue);
+					g2d.fillRect(posX, posY, 20, 20);
+				}
 			}
-			int posX = (int) ( vehicle.getVehiclePostion()[0]*mapScale );
-			int posY = (int) ( vehicle.getVehiclePostion()[1]*mapScale );
-			
-			// TODO: add vehicle icon
-			g2d.setColor(Color.blue);
-			g2d.fillRect(posX, posY, 8, 15);
 			
 			if (vehicle.doShowRoute()) {
 				// show route of the vehicle

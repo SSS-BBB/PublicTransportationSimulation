@@ -1,6 +1,10 @@
 package vehicles;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 import stops.StopSign;
 import useful.*;
@@ -24,12 +28,14 @@ public abstract class Vehicle {
 	protected double currentSpeed[]; // [vx, vy]
 	protected double position[]; // exact position of the vehicle
 	
+	protected BufferedImage vehicleImage;
+	
 	
 	
 	// Calculating fee according to the stop
 	public abstract double fee(StopSign from, StopSign to);
 	
-	public Vehicle(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval, double averageSpeed) {
+	public Vehicle(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval, double averageSpeed, String imagePath) {
 		this.vehicleName = vehicleName;
 		this.vehicleLicence = vehicleLicence;
 		this.stops = stops;
@@ -62,11 +68,19 @@ public abstract class Vehicle {
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
 		showRoute = false;
 		showVehicle = true;
+		
+		// create image
+		try {
+			vehicleImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Vehicle(String vehicleName, String vehicleLicence, StopSign[] stops, 
 			double waitInterval, double averageSpeed,
-			int stopIndex, boolean forward) {
+			int stopIndex, boolean forward,
+			String imagePath) {
 		
 		// set where which stop the bus is, and where it is heading
 		this.vehicleName = vehicleName;
@@ -90,6 +104,13 @@ public abstract class Vehicle {
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
 		showRoute = false;
 		showVehicle = true;
+		
+		// create image
+		try {
+			vehicleImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	protected void setWaitingTime() {
@@ -171,6 +192,10 @@ public abstract class Vehicle {
 	
 	public StopSign getCurrentStop() {
 		return currentStop;
+	}
+	
+	public BufferedImage getVehicleImage() {
+		return vehicleImage;
 	}
 	
 	public double[] getCurrentSpeed() {
