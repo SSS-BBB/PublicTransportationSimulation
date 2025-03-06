@@ -62,6 +62,7 @@ public class BusStopDetailPanel extends JPanel  {
 			}
 			
 		});
+		// TODO: Back Button To the top left corner
 		backBtn.setAlignmentX(CENTER_ALIGNMENT);
 		add(backBtn);
 		
@@ -100,13 +101,14 @@ public class BusStopDetailPanel extends JPanel  {
 	}
 	
 	public JPanel createVehiclePanel(Vehicle vehicle, int i) {
-		// Vehicle Container Panel (FlowLayout)
+		// Vehicle Container Panel (BoxLayout(X_AXIS))
 		JPanel containerPanel = new JPanel();
 		containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.X_AXIS));
 		
 		// Border
 		containerPanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		
+		// Detail Panel
 		JPanel vehiclePanel = new JPanel();
 		vehiclePanel.setLayout(new BoxLayout(vehiclePanel, BoxLayout.Y_AXIS));
 		
@@ -119,6 +121,23 @@ public class BusStopDetailPanel extends JPanel  {
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, 15))); // Top
 		
 		// Components
+		
+		// Vehicle setting button
+		JButton settingBtn = new JButton("Setting");
+		settingBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == settingBtn) {
+				new VehicleSettingFrame(map, vehicleList, selectedStop, vehicle);
+				detailFrame.dispose();
+			}
+		}
+		});
+		// TODO: Setting Button To the top right corner
+		// settingBtn.setAlignmentX(LEFT_ALIGNMENT);
+		vehiclePanel.add(settingBtn);
+		
+		// Labels
 		namelb[i] = new JLabel(vehicle.getVehicleName());
 		namelb[i].setFont(topicFont);
 		vehiclePanel.add(namelb[i]);
@@ -150,20 +169,6 @@ public class BusStopDetailPanel extends JPanel  {
 		etalb[i] = new JLabel(String.format("ETA: %.2f", vehicle.getEstimatedTime(selectedStop)));
 		etalb[i].setFont(detailFont);
 		vehiclePanel.add(etalb[i]);
-		
-		// More info button
-		JButton moreBtn = new JButton("More");
-		moreBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == moreBtn) {
-					new VehicleDetailFrame(map, vehicleList, selectedStop, vehicle);
-					detailFrame.dispose();
-				}
-			}
-		});
-		
-		vehiclePanel.add(moreBtn);
 		
 		// Padding within the panel
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, 15))); // Bottom

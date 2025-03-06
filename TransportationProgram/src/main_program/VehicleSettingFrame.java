@@ -6,14 +6,14 @@ import data_mangement.MapData;
 import stops.StopSign;
 import vehicles.*;
 
-public class VehicleDetailFrame extends JFrame {
+public class VehicleSettingFrame extends JFrame {
 	
 	private MapData map;
 	private Vehicle[] vehicleList;
 	private StopSign selectedStop;
 	private Vehicle selectedVehicle;
 	
-	public VehicleDetailFrame(MapData map, Vehicle[] vehicleList, StopSign selectedStop, 
+	public VehicleSettingFrame(MapData map, Vehicle[] vehicleList, StopSign selectedStop, 
 							Vehicle selectedVehicle) {
 		// Attributes setting
 		this.map = map;
@@ -27,7 +27,7 @@ public class VehicleDetailFrame extends JFrame {
 		setLocationRelativeTo(null);
 		
 		// Set Panel
-		VehicleDetailPanel vPanel = new VehicleDetailPanel(this, map, selectedVehicle);
+		VehicleSettingPanel vPanel = new VehicleSettingPanel(this, map, selectedVehicle);
 		add(vPanel);
 		
 		// Show Frame

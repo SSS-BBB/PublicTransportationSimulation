@@ -16,7 +16,8 @@ public abstract class Vehicle {
 	protected StopSign nextStop;
 	
 	protected boolean forward; // direction of the vehicle going either forward(first -last) or backward(last - first)
-	protected boolean showRoute; // whether to show the vehicle route
+	protected boolean showRoute; // whether to show the vehicle route on the map
+	protected boolean showVehicle; // whether to show the vehicle on the map
 	protected double averageSpeed;
 	protected double waitInterval; // how long does it take for the vehicle to start driving when it just arrives at the 0th stop
 	protected double waiting; // time left before driver starts driving again
@@ -60,6 +61,7 @@ public abstract class Vehicle {
 		
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
 		showRoute = false;
+		showVehicle = true;
 	}
 	
 	public Vehicle(String vehicleName, String vehicleLicence, StopSign[] stops, 
@@ -87,6 +89,7 @@ public abstract class Vehicle {
 		
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
 		showRoute = false;
+		showVehicle = true;
 	}
 	
 	protected void setWaitingTime() {
@@ -152,10 +155,7 @@ public abstract class Vehicle {
 				break;
 			}
 		}
-	}
-	
-	
-	
+	}	
 	
 	public String getVehicleName() {
 		return vehicleName;
@@ -189,12 +189,20 @@ public abstract class Vehicle {
 		return nextStop;
 	}
 	
-	public boolean isShowRoute() {
+	public boolean doShowRoute() {
 		return showRoute;
+	}
+	
+	public boolean doShowVehicle() {
+		return showVehicle;
 	}
 	
 	public void updateShowRouteStatus(boolean status) {
 		showRoute = status;
+	}
+	
+	public void updateShowVehicleStatus(boolean status) {
+		showVehicle = status;
 	}
 	
 	protected double distanceAccumulated(int from, int to) {
