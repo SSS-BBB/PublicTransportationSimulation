@@ -246,6 +246,14 @@ public abstract class Vehicle {
 		return stops[0];
 	}
 	
+	public StopSign getStopFromName(String stopName) {
+		for (StopSign stop : stops) {
+			if (stop.getStopName().equals(stopName))
+				return stop;
+		}
+		return null; // no stop name in this vehicle
+	}
+	
 	protected double distanceAccumulated(int from, int to) {
 		// accumulate the distance from the stopDistance array
 		if (to >= stops.length) return 0.0;

@@ -1,7 +1,9 @@
 package main_program;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.*;
@@ -9,20 +11,25 @@ import java.awt.event.*;
 import javax.swing.*;
 import vehicles.*;
 import data_mangement.*;
+import stops.*;
 
 public class VehicleSettingPanel extends JPanel implements ActionListener {
 	
 	private VehicleSettingFrame vehicleFrame;
 	private Vehicle selectedVehicle;
+	private StopSign selectedStop;
 	private MapData map;
-	JLabel namelb, licenselb, showRoutelb, showVehiclelb;
-	JButton showRouteToggleBtn, showVehicleToggleBtn, backBtn;
+	JLabel namelb, licenselb, showRoutelb, showVehiclelb, feelb;
+	JButton showRouteToggleBtn, showVehicleToggleBtn, backBtn, calculateFeeBtn;
+	JComboBox fromCombo, toCombo;
 	
-	public VehicleSettingPanel(VehicleSettingFrame vehicleFrame, MapData map, Vehicle selectedVehicle) {
+	public VehicleSettingPanel(VehicleSettingFrame vehicleFrame, MapData map, Vehicle selectedVehicle, 
+			StopSign selectedStop) {
 		// Attributes setting
 		this.vehicleFrame = vehicleFrame;
 		this.selectedVehicle = selectedVehicle;
 		this.map = map;
+		this.selectedStop = selectedStop;
 		
 		// Layout
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -55,7 +62,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		
 		// Margin
 		int margin = 15; // margin between components within the vehicle setting container
-		// TODO: spacing
+		int spacing = 50; // space to separate group of components
 		
 		// Fonts
 		Font topicFont = new Font("Tahoma", Font.BOLD, 42); // font for vehicle name
@@ -72,12 +79,45 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		licenselb.setAlignmentX(CENTER_ALIGNMENT);
 		licenselb.setFont(subHeadingFont);
 		vehicleSettingContainer.add(licenselb);
+		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing)));
+		
+		JLabel selectlb = new JLabel("Please select your destination to calculate fee");
+		selectlb.setAlignmentX(CENTER_ALIGNMENT);
+		selectlb.setFont(detailFont);
+		vehicleSettingContainer.add(selectlb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
-		// TODO: add 2 jcombox to select from station and the other one select to station in order to calculate the fee
-		// also add 1 button to calculate
+		JPanel comboBoxContainer = new JPanel();
+		comboBoxContainer.setLayout(new BoxLayout(comboBoxContainer, BoxLayout.X_AXIS));
+		String[] stopList = getStopNameList();
+		/* fromCombo = new JComboBox<>(stopList);
+		fromCombo.setPreferredSize(new Dimension(150, 40));
+		fromCombo.setMaximumSize(fromCombo.getPreferredSize());
+		comboBoxContainer.add(fromCombo); */
+		toCombo = new JComboBox<>(stopList);
+		toCombo.setPreferredSize(new Dimension(150, 40));
+		toCombo.setMaximumSize(toCombo.getPreferredSize());
+		comboBoxContainer.add(toCombo);
+		comboBoxContainer.add(Box.createRigidArea(new Dimension(margin, 0)));
+		calculateFeeBtn = new JButton("Calculate fee");
+		calculateFeeBtn.addActionListener(this);
+		comboBoxContainer.add(calculateFeeBtn);
+		vehicleSettingContainer.add(comboBoxContainer);
+		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
-		// TODO: add fee label to show the calculated fee
+		StopSign destinationStop = selectedVehicle.getStopFromName(toCombo.getSelectedItem().toString());
+		if (destinationStop != null) {
+			feelb = new JLabel(String.format("Fee: %.2f", selectedVehicle.fee(selectedStop, destinationStop)));
+			feelb.setForeground(Color.black);
+		}
+		else {
+			feelb = new JLabel("Fee: cannot calculate fee!");
+			feelb.setForeground(Color.red);
+		}
+		feelb.setAlignmentX(CENTER_ALIGNMENT);
+		feelb.setFont(detailFont);
+		vehicleSettingContainer.add(feelb);
+		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
 		showRoutelb = new JLabel(String.format("Show route of this vehicle on the map: %s", 
 										selectedVehicle.doShowRoute() ? "Yes": "No"));
@@ -158,6 +198,27 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 			vehicleFrame.goBack();
 		}
 		
+		else if (e.getSource() == calculateFeeBtn) {
+			StopSign destinationStop = selectedVehicle.getStopFromName(toCombo.getSelectedItem().toString());
+			if (destinationStop != null) {
+				feelb.setText(String.format("Fee: %.2f", selectedVehicle.fee(selectedStop, destinationStop)));
+				feelb.setForeground(Color.black);
+			}
+			else {
+				feelb.setText("Fee: cannot calculate fee!");
+				feelb.setForeground(Color.red);
+			}
+		}
+		
+	}
+	
+	private String[] getStopNameList() {
+		StopSign[] vehicleStops = selectedVehicle.getVehicleStops();
+		String[] stopNameList = new String[vehicleStops.length];
+		for (int i = 0; i < vehicleStops.length; i++) {
+			stopNameList[i] = vehicleStops[i].getStopName();
+		}
+		return stopNameList;
 	}
 	
 }

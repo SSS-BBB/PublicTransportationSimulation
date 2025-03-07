@@ -27,7 +27,7 @@ public class VehicleSettingFrame extends JFrame {
 		setLocationRelativeTo(null);
 		
 		// Set Panel
-		VehicleSettingPanel vPanel = new VehicleSettingPanel(this, map, selectedVehicle);
+		VehicleSettingPanel vPanel = new VehicleSettingPanel(this, map, selectedVehicle, selectedStop);
 		add(vPanel);
 		
 		// Show Frame
