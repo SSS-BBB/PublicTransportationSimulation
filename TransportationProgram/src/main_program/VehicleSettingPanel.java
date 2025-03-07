@@ -5,9 +5,13 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import maps.*;
@@ -31,6 +35,10 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		this.selectedVehicle = selectedVehicle;
 		this.map = map;
 		this.selectedStop = selectedStop;
+		
+		// Background
+		// repaint();
+		setBackground(Color.white);
 		
 		// Layout
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -58,8 +66,11 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		// Vehicle Setting Details Container
 		JPanel xBoxContainer = new JPanel();
 		xBoxContainer.setLayout(new BoxLayout(xBoxContainer, BoxLayout.X_AXIS));
+		xBoxContainer.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		JPanel vehicleSettingContainer = new JPanel();
 		vehicleSettingContainer.setLayout(new BoxLayout(vehicleSettingContainer, BoxLayout.Y_AXIS));
+		
+		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, 20))); // margin top
 		
 		// Margin
 		int margin = 15; // margin between components within the vehicle setting container
@@ -96,7 +107,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		fromCombo.setMaximumSize(fromCombo.getPreferredSize());
 		comboBoxContainer.add(fromCombo); */
 		toCombo = new JComboBox<>(stopList);
-		toCombo.setPreferredSize(new Dimension(150, 40));
+		toCombo.setPreferredSize(new Dimension(150, 30));
 		toCombo.setMaximumSize(toCombo.getPreferredSize());
 		comboBoxContainer.add(toCombo);
 		comboBoxContainer.add(Box.createRigidArea(new Dimension(margin, 0)));
@@ -154,7 +165,11 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		vehicleBtn.setAlignmentX(CENTER_ALIGNMENT);
 		vehicleSettingContainer.add(vehicleBtn);
 		
-		xBoxContainer.add(vehicleSettingContainer);
+		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, 20))); // margin bottom
+		
+		xBoxContainer.add(Box.createRigidArea(new Dimension(20, 0))); // margin left
+		xBoxContainer.add(vehicleSettingContainer); // content
+		xBoxContainer.add(Box.createRigidArea(new Dimension(20, 0))); // margin right
 		
 		add(xBoxContainer);
 	}
@@ -231,5 +246,24 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		}
 		return stopNameList;
 	}
+	
+	/* 
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		BufferedImage bg = null;
+		try {
+			bg = ImageIO.read(getClass().getResource("/backgrounds/chillguy.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (bg != null) {
+			g.drawImage(bg, 0, 0, vehicleFrame.getWidth(), vehicleFrame.getHeight(), null);
+		}
+		else {
+			vehicleFrame.setBackground(Color.white);
+		}
+	}
+	*/
 	
 }

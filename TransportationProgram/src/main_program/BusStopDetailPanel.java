@@ -3,7 +3,10 @@ package main_program;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import maps.*;
@@ -25,6 +28,7 @@ public class BusStopDetailPanel extends JPanel  {
 	public BusStopDetailPanel(BusStopDetailFrame detailFrame, MapData map, Vehicle[] vehicleList, StopSign selectedStop) {
 		
 		// TODO: color this window
+		repaint();
 		
 		// Value Setting
 		this.detailFrame = detailFrame;
