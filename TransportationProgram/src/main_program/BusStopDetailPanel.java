@@ -28,7 +28,7 @@ public class BusStopDetailPanel extends JPanel  {
 	public BusStopDetailPanel(BusStopDetailFrame detailFrame, MapData map, Vehicle[] vehicleList, StopSign selectedStop) {
 		
 		// TODO: color this window
-		repaint();
+		// repaint();
 		
 		// Value Setting
 		this.detailFrame = detailFrame;

@@ -28,6 +28,8 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 	JButton showRouteToggleBtn, showVehicleToggleBtn, backBtn, calculateFeeBtn, vehicleBtn; // TODO: decorate button
 	JComboBox fromCombo, toCombo;
 	
+	private boolean smartBusMember;
+	
 	public VehicleSettingPanel(VehicleSettingFrame vehicleFrame, MapData map, Vehicle selectedVehicle, 
 			StopSign selectedStop) {
 		// Attributes setting
@@ -35,6 +37,19 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		this.selectedVehicle = selectedVehicle;
 		this.map = map;
 		this.selectedStop = selectedStop;
+		
+		if (selectedVehicle instanceof SmartBus) {
+			// Member of smart bus check
+			String[] options = {"Yes", "No"};
+			int selectedOption = JOptionPane.showOptionDialog(null, "Are you a member of Smart Bus?",
+					"Smart Bus Member", 0, 2, null, options, options[0]);
+			if (selectedOption == 0) {
+				this.smartBusMember = true;
+			}
+			else {
+				this.smartBusMember = false;
+			}
+		}
 		
 		// Background
 		// repaint();
@@ -74,18 +89,31 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		
 		// Margin
 		int margin = 15; // margin between components within the vehicle setting container
-		int spacing = 50; // space to separate group of components
+		int spacing = 30; // space to separate group of components
 		
 		// Fonts
-		Font topicFont = new Font("Tahoma", Font.BOLD, 42); // font for vehicle name
-		Font subHeadingFont = new Font("Tahoma", Font.PLAIN, 32); // font for license
-		Font detailFont = new Font("Tahoma", Font.PLAIN, 18); // font for vehicle detail
+		Font topicFont = new Font("Tahoma", Font.BOLD, 36); // font for vehicle name
+		Font subHeadingFont = new Font("Tahoma", Font.PLAIN, 24); // font for license
+		Font detailFont = new Font("Tahoma", Font.PLAIN, 14); // font for vehicle detail
 		
 		namelb = new JLabel(selectedVehicle.getVehicleName());
 		namelb.setAlignmentX(CENTER_ALIGNMENT);
 		namelb.setFont(topicFont);
 		vehicleSettingContainer.add(namelb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+		
+		// Vehicle image
+		JPanel imageContainer = new JPanel();
+		imageContainer.setLayout(new BoxLayout(imageContainer, BoxLayout.X_AXIS));
+		JLabel vehicleImagelb = new JLabel();
+		ImageIcon vehicleIcon = new ImageIcon(getClass().getResource(selectedVehicle.getImagePath()));
+		if (vehicleIcon != null) {
+			Image vehicleImg = vehicleIcon.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+			vehicleImagelb.setIcon(new ImageIcon(vehicleImg));
+			imageContainer.add(vehicleImagelb);
+			vehicleSettingContainer.add(imageContainer); // for some reason you need jpanel to center the icon
+			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+		}
 		
 		licenselb = new JLabel(selectedVehicle.getVehicleLicence());
 		licenselb.setAlignmentX(CENTER_ALIGNMENT);
@@ -119,7 +147,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		
 		StopSign destinationStop = selectedVehicle.getStopFromName(toCombo.getSelectedItem().toString());
 		if (destinationStop != null) {
-			feelb = new JLabel(String.format("Fee: %.2f", selectedVehicle.fee(selectedStop, destinationStop)));
+			feelb = new JLabel(String.format("Fee: %.2f", getFee(selectedStop, destinationStop)));
 			feelb.setForeground(Color.black);
 		}
 		else {
@@ -130,6 +158,35 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		feelb.setFont(detailFont);
 		vehicleSettingContainer.add(feelb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing)));
+		
+		boolean space = false;
+		if (selectedVehicle instanceof AirConditionedBus) {
+			// Air-Conditioned Bus components
+			AirConditionedBus airBus = (AirConditionedBus) selectedVehicle;
+			JLabel templb = new JLabel(String.format("Temperature: %.2f°C", airBus.getTemperature()));
+			templb.setFont(detailFont);
+			templb.setAlignmentX(CENTER_ALIGNMENT);
+			vehicleSettingContainer.add(templb);
+			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+			space = true;
+		}
+		if (selectedVehicle instanceof SmartBus && smartBusMember) {
+			// Air-Conditioned Bus components
+			SmartBus smartBus = (SmartBus) selectedVehicle;
+			JLabel peoplelb = new JLabel(String.format("People on the bus: %d", smartBus.getNumberOfPeopleOnBus()));
+			peoplelb.setFont(detailFont);
+			peoplelb.setAlignmentX(CENTER_ALIGNMENT);
+			vehicleSettingContainer.add(peoplelb);
+			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+			JLabel seatlb = new JLabel("Seat Left: " + smartBus.getSeatLeft());
+			seatlb.setFont(detailFont);
+			seatlb.setAlignmentX(CENTER_ALIGNMENT);
+			vehicleSettingContainer.add(seatlb);
+			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+			space = true;
+		}
+		if (space)
+			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing-margin))); // do space if the vehicle is not normal bus
 		
 		showRoutelb = new JLabel(String.format("Show route of this vehicle on the map: %s", 
 										selectedVehicle.doShowRoute() ? "Yes": "No"));
@@ -221,7 +278,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		else if (e.getSource() == calculateFeeBtn) {
 			StopSign destinationStop = selectedVehicle.getStopFromName(toCombo.getSelectedItem().toString());
 			if (destinationStop != null) {
-				feelb.setText(String.format("Fee: %.2f", selectedVehicle.fee(selectedStop, destinationStop)));
+				feelb.setText(String.format("Fee: %.2f", getFee(selectedStop, destinationStop)));
 				feelb.setForeground(Color.black);
 			}
 			else {
@@ -245,6 +302,20 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 			stopNameList[i] = vehicleStops[i].getStopName();
 		}
 		return stopNameList;
+	}
+	
+	private double getFee(StopSign from, StopSign to) {
+		
+		if (selectedVehicle instanceof SmartBus) {
+			SmartBus smartBus = (SmartBus) selectedVehicle;
+			// check member
+			if (smartBusMember) {
+				return smartBus.subsriptionFee(from, to);
+			}
+		}
+		
+		return selectedVehicle.fee(from, to);
+		
 	}
 	
 	/* 

@@ -333,6 +333,18 @@ public abstract class Vehicle {
 		
 	}
 	
+	public int numberOfStation(StopSign from, StopSign to) {
+		// How many stations away from ... to ...
+		int fromIndex = getStopIndex(from);
+		int toIndex = getStopIndex(to);
+		if (fromIndex == -1 || toIndex == -1) {
+			// The vehicle does not pass this and/or that stop
+			return -1;
+		}
+		
+		return Math.abs(toIndex - fromIndex);
+	}
+	
 	// Hour ??
 	public double getEstimatedTime(StopSign stop) {
 		double time = distanceToTargetStop(stop) / averageSpeed;
@@ -408,6 +420,7 @@ public abstract class Vehicle {
 			currentStop = stops[nextStopIndex];
 			// System.out.println("Update Stop");
 			setNextStop();
+			onUpdateCurrentStop();
 		}
 		
 		// only reset if it's close enough
@@ -417,6 +430,10 @@ public abstract class Vehicle {
 		}
 		*/
 		
+	}
+	
+	protected void onUpdateCurrentStop() {
+		// when current stop is updated
 	}
 	
 	// get index of an array given the stop

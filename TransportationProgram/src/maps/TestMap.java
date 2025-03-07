@@ -1,8 +1,7 @@
 package maps;
 
-import stops.StopSign;
-import vehicles.NormalBus;
-import vehicles.Vehicle;
+import stops.*;
+import vehicles.*;
 
 public class TestMap extends MapData {
 	
@@ -22,8 +21,8 @@ public class TestMap extends MapData {
 		
 		// set vehicles
 		vehicles = new Vehicle[] { 
-				new NormalBus("Test1", "000", stops, 0.5, 2.0),
-				new NormalBus("Test2", "001", stops, 0.4, 1.5),
+				new SmartBus("Test1", "000", stops, 0.5, 2.0, 24.0),
+				new AirConditionedBus("Test2", "001", stops, 0.4, 1.5, 25.0),
 				new NormalBus("Test3", "002", stops, 0.25, 3.5),
 				new NormalBus("Test4", "003", stops, 0.49, 4.9),
 				new NormalBus("Test5", "004", stops, 1.1, 5.6)
