@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import data_mangement.*;
+import maps.*;
 import stops.*;
 import vehicles.*;
 
@@ -28,25 +28,11 @@ public class MapFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					// Set frame
-					MapFrame frame = new MapFrame();
-					
 					// Set map
 					MapData testMap = new TestMap();
 					
-					// Set panel
-					JPanel containerPanel = new JPanel();
-					containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));
-					
-					MapPanel mapPanel = new MapPanel(testMap, frame, 4);
-					mapPanel.setLayout(null);
-					containerPanel.add(mapPanel);
-					
-					frame.add(containerPanel);
-					
-					frame.setVisible(true);
-					
-					mapPanel.startLoop();
+					// Set frame
+					MapFrame frame = new MapFrame(testMap);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,13 +40,30 @@ public class MapFrame extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public MapFrame() {
+	private MapData map;
+	
+	public MapFrame(MapData map) {
+		// Attribute setting
+		this.map = map;
+		
+		// Frame setting
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
 		setLocationRelativeTo(null);
+		
+		// Set panel
+		JPanel containerPanel = new JPanel();
+		containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));
+		
+		MapPanel mapPanel = new MapPanel(map, this, 4);
+		mapPanel.setLayout(null);
+		containerPanel.add(mapPanel);
+		
+		add(containerPanel);
+		
+		setVisible(true);
+		
+		mapPanel.startLoop();
 	}
 	
 

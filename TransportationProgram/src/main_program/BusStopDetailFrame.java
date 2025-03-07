@@ -3,9 +3,9 @@ package main_program;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import maps.*;
 import vehicles.*;
 import stops.*;
-import data_mangement.*;
 
 public class BusStopDetailFrame extends JFrame {
 	private MapData map;

@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import maps.*;
 import stops.StopSign;
 import vehicles.Vehicle;
-import data_mangement.*;
 
 public class BusStopDetailPanel extends JPanel  {
 	
@@ -46,16 +46,7 @@ public class BusStopDetailPanel extends JPanel  {
 				if (e.getSource() == backBtn) {
 					try {
 						// Set frame
-						MapFrame frame = new MapFrame();
-						
-						// Set panel
-						MapPanel panel = new MapPanel(map, frame, 4);
-						panel.setLayout(null);
-						frame.add(panel);
-						
-						frame.setVisible(true);
-						panel.startLoop();
-						
+						new MapFrame(map);
 						detailFrame.dispose();
 						
 						

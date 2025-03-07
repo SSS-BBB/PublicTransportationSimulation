@@ -3,6 +3,7 @@ package main_program;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import maps.*;
 import stops.StopSign;
 import useful.*;
 
@@ -39,9 +40,8 @@ public class StopClickListener implements MouseListener {
 		int[] backPos = panel.getBackBtnPos();
 		int[] backSize = panel.getBackBtnSize();
 		if (isInRect(mousePosI, backPos, backSize)) {
+			// Back button clicked
 			// TODO: go back to map selection frame
-			
-			
 			panel.stopLoop();
 			return;
 		}

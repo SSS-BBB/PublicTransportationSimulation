@@ -2,7 +2,7 @@ package main_program;
 
 import javax.swing.*;
 
-import data_mangement.MapData;
+import maps.MapData;
 import stops.StopSign;
 import vehicles.*;
 
@@ -37,6 +37,22 @@ public class VehicleSettingFrame extends JFrame {
 	public void goBack() {
 		new BusStopDetailFrame(map, vehicleList, selectedStop);
 		dispose();
+	}
+	
+	public MapData getMap() {
+		return map;
+	}
+	
+	public Vehicle[] getVehicleList() {
+		return vehicleList;
+	}
+	
+	public StopSign getSelectedStop() {
+		return selectedStop;
+	}
+	
+	public Vehicle getSelectedVehicle() {
+		return selectedVehicle;
 	}
 	
 }

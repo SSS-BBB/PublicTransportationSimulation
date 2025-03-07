@@ -9,8 +9,9 @@ import java.awt.Image;
 import java.awt.event.*;
 
 import javax.swing.*;
+
+import maps.*;
 import vehicles.*;
-import data_mangement.*;
 import stops.*;
 
 public class VehicleSettingPanel extends JPanel implements ActionListener {
@@ -20,7 +21,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 	private StopSign selectedStop;
 	private MapData map;
 	JLabel namelb, licenselb, showRoutelb, showVehiclelb, feelb;
-	JButton showRouteToggleBtn, showVehicleToggleBtn, backBtn, calculateFeeBtn;
+	JButton showRouteToggleBtn, showVehicleToggleBtn, backBtn, calculateFeeBtn, vehicleBtn; // TODO: decorate button
 	JComboBox fromCombo, toCombo;
 	
 	public VehicleSettingPanel(VehicleSettingFrame vehicleFrame, MapData map, Vehicle selectedVehicle, 
@@ -146,12 +147,16 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		showVehicleToggleBtn.addActionListener(this);
 		showVehicleToggleBtn.setAlignmentX(CENTER_ALIGNMENT);
 		vehicleSettingContainer.add(showVehicleToggleBtn);
+		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing)));
+		
+		vehicleBtn = new JButton(selectedVehicle.getVehicleName());
+		vehicleBtn.addActionListener(this);
+		vehicleBtn.setAlignmentX(CENTER_ALIGNMENT);
+		vehicleSettingContainer.add(vehicleBtn);
 		
 		xBoxContainer.add(vehicleSettingContainer);
 		
 		add(xBoxContainer);
-		
-		// TODO: add (vehicle name) button, when clicked go back to map and only show vehicle with this name(สายรถ)
 	}
 
 	@Override
@@ -208,6 +213,12 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 				feelb.setText("Fee: cannot calculate fee!");
 				feelb.setForeground(Color.red);
 			}
+		}
+		
+		else if (e.getSource() == vehicleBtn) {
+			map.showOnly(selectedVehicle);
+			new MapFrame(map);
+			vehicleFrame.dispose();
 		}
 		
 	}

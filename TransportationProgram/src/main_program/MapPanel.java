@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import data_mangement.MapData;
+import maps.MapData;
 import stops.StopSign;
 import vehicles.Vehicle;
 
@@ -99,7 +99,6 @@ public class MapPanel extends JPanel implements Runnable {
 	}
 	
 	public void setBackBtn(Graphics2D g2d) {
-		// TODO: add back icon
 		BufferedImage backIcon = null;
 		try {
 			backIcon = ImageIO.read(getClass().getResourceAsStream("/icons/backArrowIcon.png"));

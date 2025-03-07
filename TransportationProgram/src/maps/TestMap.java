@@ -1,4 +1,4 @@
-package data_mangement;
+package maps;
 
 import stops.StopSign;
 import vehicles.NormalBus;
