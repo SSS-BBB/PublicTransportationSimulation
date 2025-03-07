@@ -147,11 +147,27 @@ public class BusStopDetailPanel extends JPanel  {
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, 15))); // Top
 		
 		// Components
+		JPanel headingContainer = new JPanel();
+		headingContainer.setLayout(new BoxLayout(headingContainer, BoxLayout.X_AXIS));
 		
 		// Labels
 		namelb[i] = new JLabel(vehicle.getVehicleName());
 		namelb[i].setFont(topicFont);
-		vehiclePanel.add(namelb[i]);
+		headingContainer.add(namelb[i]);
+		headingContainer.add(Box.createRigidArea(new Dimension(120, 0)));
+		
+		// Vehicle image
+		JLabel vehicleImagelb = new JLabel();
+		ImageIcon vehicleIcon = new ImageIcon(getClass().getResource(vehicle.getImagePath()));
+		if (vehicleIcon != null) {
+			Image vehicleImg = vehicleIcon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+			vehicleImagelb.setIcon(new ImageIcon(vehicleImg));
+			
+			headingContainer.add(vehicleImagelb);
+			// vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
+		}
+		headingContainer.setAlignmentX(LEFT_ALIGNMENT);
+		vehiclePanel.add(headingContainer);
 		
 		JLabel routelb = new JLabel(String.format("%s -> %s", vehicle.getFrom().getStopName(), vehicle.getTo().getStopName()));
 		routelb.setFont(subHeadingFont);
@@ -221,8 +237,6 @@ public class BusStopDetailPanel extends JPanel  {
 		settingBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		vehiclePanel.add(settingBtn);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
-		
-		// TODO: add vehicle image 
 		
 		// Padding within the panel
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, 15))); // Bottom

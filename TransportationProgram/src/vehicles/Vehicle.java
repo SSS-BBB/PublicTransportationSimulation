@@ -28,6 +28,7 @@ public abstract class Vehicle {
 	protected double currentSpeed[]; // [vx, vy]
 	protected double position[]; // exact position of the vehicle
 	
+	protected String imagePath;
 	protected BufferedImage vehicleImage;
 	
 	
@@ -41,6 +42,7 @@ public abstract class Vehicle {
 		this.stops = stops;
 		this.waitInterval = waitInterval;
 		this.averageSpeed = averageSpeed;
+		this.imagePath = imagePath;
 		
 		
 		// randomize where the bus is
@@ -88,6 +90,7 @@ public abstract class Vehicle {
 		this.stops = stops;
 		this.waitInterval = waitInterval;
 		this.averageSpeed = averageSpeed;
+		this.imagePath = imagePath;
 		
 		this.currentStop = this.stops[stopIndex];
 		this.forward = forward;
@@ -220,6 +223,10 @@ public abstract class Vehicle {
 	
 	public boolean doShowVehicle() {
 		return showVehicle;
+	}
+	
+	public String getImagePath() {
+		return imagePath;
 	}
 	
 	public void updateShowRouteStatus(boolean status) {
