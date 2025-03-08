@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import maps.*;
+import program_colors.ProgramColor;
 
 public class MapSelectionPanel extends JPanel implements ActionListener {
 	
@@ -19,19 +20,19 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 		
 		// Panel setting
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		setBackground(new Color(161, 227, 249));
+		setBackground(ProgramColor.DARK_BLUE);
 		
 		// Glue
 		add(Box.createVerticalGlue());
 		
-		// Margin
+		// Margin and Spacing
 		int margin = 20;
 		
 		// Components
 		JLabel selectMapLb = new JLabel("Select Map");
 		selectMapLb.setAlignmentX(CENTER_ALIGNMENT);
 		selectMapLb.setFont(new Font("Tahoma", Font.BOLD, 50));
-		selectMapLb.setForeground(new Color(54, 116, 181));
+		selectMapLb.setForeground(Color.white);
 		add(selectMapLb);
 		add(Box.createRigidArea(new Dimension(0, margin)));
 		
@@ -39,6 +40,7 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 		mapSelectComboBox.setPreferredSize(new Dimension(500, 40));
 		mapSelectComboBox.setMaximumSize(mapSelectComboBox.getPreferredSize());
 		mapSelectComboBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mapSelectComboBox.setBackground(null);
 		// TODO: design drop down
 		add(mapSelectComboBox);
 		add(Box.createRigidArea(new Dimension(0, margin)));

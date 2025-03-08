@@ -17,16 +17,21 @@ import javax.swing.*;
 import maps.*;
 import vehicles.*;
 import stops.*;
+import program_colors.*;
 
 public class VehicleSettingPanel extends JPanel implements ActionListener {
 	
 	private VehicleSettingFrame vehicleFrame;
+	
 	private Vehicle selectedVehicle;
 	private StopSign selectedStop;
 	private MapData map;
-	JLabel namelb, licenselb, showRoutelb, showVehiclelb, feelb;
-	JButton showRouteToggleBtn, showVehicleToggleBtn, backBtn, calculateFeeBtn, vehicleBtn; // TODO: decorate button
-	JComboBox fromCombo, toCombo;
+	
+	private Color bgColor, topicColor, subHeadingColor, detailColor;
+	
+	private JLabel namelb, licenselb, showRoutelb, showVehiclelb, feelb;
+	private JButton showRouteToggleBtn, showVehicleToggleBtn, backBtn, calculateFeeBtn, vehicleBtn; // TODO: decorate button
+	private JComboBox<String> fromCombo, toCombo;
 	
 	private boolean smartBusMember;
 	
@@ -52,8 +57,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		}
 		
 		// Background
-		// repaint();
-		setBackground(Color.white);
+		setBackground(ProgramColor.DARK_BLUE);
 		
 		// Layout
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -75,15 +79,25 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		backBtnContainer.add(backBtn);
 		backBtnContainer.add(Box.createHorizontalGlue());
+		backBtnContainer.setBackground(ProgramColor.DARK_BLUE);
 		add(backBtnContainer);
 		add(Box.createRigidArea(new Dimension(0, 50)));
+		
+		// Colors
+		bgColor = ProgramColor.BLUE;
+		topicColor = Color.white;
+		subHeadingColor = Color.white;
+		detailColor = ProgramColor.LIGHT_GREEN;
 		
 		// Vehicle Setting Details Container
 		JPanel xBoxContainer = new JPanel();
 		xBoxContainer.setLayout(new BoxLayout(xBoxContainer, BoxLayout.X_AXIS));
-		xBoxContainer.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+		xBoxContainer.setBorder(BorderFactory.createLineBorder(ProgramColor.LIGHT_BLUE, 2));
+		xBoxContainer.setBackground(bgColor);
+		
 		JPanel vehicleSettingContainer = new JPanel();
 		vehicleSettingContainer.setLayout(new BoxLayout(vehicleSettingContainer, BoxLayout.Y_AXIS));
+		vehicleSettingContainer.setBackground(bgColor);
 		
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, 20))); // margin top
 		
@@ -99,12 +113,14 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		namelb = new JLabel(selectedVehicle.getVehicleName());
 		namelb.setAlignmentX(CENTER_ALIGNMENT);
 		namelb.setFont(topicFont);
+		namelb.setForeground(topicColor);
 		vehicleSettingContainer.add(namelb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		// Vehicle image
 		JPanel imageContainer = new JPanel();
 		imageContainer.setLayout(new BoxLayout(imageContainer, BoxLayout.X_AXIS));
+		imageContainer.setBackground(bgColor);
 		JLabel vehicleImagelb = new JLabel();
 		ImageIcon vehicleIcon = new ImageIcon(getClass().getResource(selectedVehicle.getImagePath()));
 		if (vehicleIcon != null) {
@@ -118,17 +134,20 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		licenselb = new JLabel(selectedVehicle.getVehicleLicence());
 		licenselb.setAlignmentX(CENTER_ALIGNMENT);
 		licenselb.setFont(subHeadingFont);
+		licenselb.setForeground(subHeadingColor);
 		vehicleSettingContainer.add(licenselb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
 		JLabel selectlb = new JLabel("Please select your destination to calculate fee");
 		selectlb.setAlignmentX(CENTER_ALIGNMENT);
 		selectlb.setFont(detailFont);
+		selectlb.setForeground(detailColor);
 		vehicleSettingContainer.add(selectlb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		JPanel comboBoxContainer = new JPanel();
 		comboBoxContainer.setLayout(new BoxLayout(comboBoxContainer, BoxLayout.X_AXIS));
+		comboBoxContainer.setBackground(bgColor);
 		String[] stopList = getStopNameList();
 		/* fromCombo = new JComboBox<>(stopList);
 		fromCombo.setPreferredSize(new Dimension(150, 40));
@@ -148,7 +167,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		StopSign destinationStop = selectedVehicle.getStopFromName(toCombo.getSelectedItem().toString());
 		if (destinationStop != null) {
 			feelb = new JLabel(String.format("Fee: %.2f", getFee(selectedStop, destinationStop)));
-			feelb.setForeground(Color.black);
+			feelb.setForeground(detailColor);
 		}
 		else {
 			feelb = new JLabel("Fee: cannot calculate fee!");
@@ -166,6 +185,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 			JLabel templb = new JLabel(String.format("Temperature: %.2f°C", airBus.getTemperature()));
 			templb.setFont(detailFont);
 			templb.setAlignmentX(CENTER_ALIGNMENT);
+			templb.setForeground(detailColor);
 			vehicleSettingContainer.add(templb);
 			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 			space = true;
@@ -173,13 +193,17 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		if (selectedVehicle instanceof SmartBus && smartBusMember) {
 			// Air-Conditioned Bus components
 			SmartBus smartBus = (SmartBus) selectedVehicle;
+			
 			JLabel peoplelb = new JLabel(String.format("People on the bus: %d", smartBus.getNumberOfPeopleOnBus()));
 			peoplelb.setFont(detailFont);
 			peoplelb.setAlignmentX(CENTER_ALIGNMENT);
+			peoplelb.setForeground(detailColor);
 			vehicleSettingContainer.add(peoplelb);
 			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+			
 			JLabel seatlb = new JLabel("Seat Left: " + smartBus.getSeatLeft());
 			seatlb.setFont(detailFont);
+			seatlb.setForeground(detailColor);
 			seatlb.setAlignmentX(CENTER_ALIGNMENT);
 			vehicleSettingContainer.add(seatlb);
 			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
@@ -192,6 +216,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 										selectedVehicle.doShowRoute() ? "Yes": "No"));
 		showRoutelb.setAlignmentX(CENTER_ALIGNMENT);
 		showRoutelb.setFont(detailFont);
+		showRoutelb.setForeground(detailColor);
 		vehicleSettingContainer.add(showRoutelb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
@@ -199,6 +224,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 										selectedVehicle.doShowVehicle() ? "Yes": "No"));
 		showVehiclelb.setAlignmentX(CENTER_ALIGNMENT);
 		showVehiclelb.setFont(detailFont);
+		showVehiclelb.setForeground(detailColor);
 		vehicleSettingContainer.add(showVehiclelb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
@@ -279,7 +305,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 			StopSign destinationStop = selectedVehicle.getStopFromName(toCombo.getSelectedItem().toString());
 			if (destinationStop != null) {
 				feelb.setText(String.format("Fee: %.2f", getFee(selectedStop, destinationStop)));
-				feelb.setForeground(Color.black);
+				feelb.setForeground(detailColor);
 			}
 			else {
 				feelb.setText("Fee: cannot calculate fee!");

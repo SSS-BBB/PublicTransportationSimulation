@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import maps.MapData;
+import program_colors.ProgramColor;
 import stops.StopSign;
 import vehicles.Vehicle;
 
@@ -39,7 +40,7 @@ public class MapPanel extends JPanel implements Runnable {
 		this.backBtnPos = new int[] {0, 0};
 		this.backBtnSize = new int[] {40, 40};
 		
-		setBackground(new Color(209, 248, 239));
+		setBackground(ProgramColor.DARK_BLUE);
 		setStopSignMapPos();
 		
 		this.stopClickListener = new MapClickListener(this);
@@ -128,7 +129,7 @@ public class MapPanel extends JPanel implements Runnable {
 						20, 20, null);
 			}
 			else {
-				g2d.setColor(Color.black);
+				g2d.setColor(ProgramColor.LIGHT_GREEN);
 				g2d.fillRect(stopSignMapPositions[i][0], stopSignMapPositions[i][1], 10, 10);
 			}
 		}
@@ -148,7 +149,7 @@ public class MapPanel extends JPanel implements Runnable {
 					g2d.drawImage(vehicle.getVehicleImage(), posX, posY, 20, 20, null);				
 				}
 				else {
-					g2d.setColor(Color.blue);
+					g2d.setColor(ProgramColor.BLUE);
 					g2d.fillRect(posX, posY, 20, 20);
 				}
 			}
@@ -167,7 +168,7 @@ public class MapPanel extends JPanel implements Runnable {
 					int x2 = (int) ( nextStop.getPosition()[0]*mapScale );
 					int y2 = (int) ( nextStop.getPosition()[1]*mapScale );
 					
-					g2d.setColor(Color.black);
+					g2d.setColor(ProgramColor.LIGHT_BLUE);
 					g2d.drawLine(x1, y1, x2, y2);
 				}
 			}

@@ -10,8 +10,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import maps.*;
-import stops.StopSign;
-import vehicles.Vehicle;
+import stops.*;
+import vehicles.*;
+import program_colors.*;
 
 public class BusStopDetailPanel extends JPanel  {
 	
@@ -26,18 +27,15 @@ public class BusStopDetailPanel extends JPanel  {
 	JPanel[] vehicleContainer;
 	
 	public BusStopDetailPanel(BusStopDetailFrame detailFrame, MapData map, Vehicle[] vehicleList, StopSign selectedStop) {
-		
-		// TODO: color this window
-		setBackground(new Color(54, 116, 181));
-		
 		// Value Setting
 		this.detailFrame = detailFrame;
 		this.map = map;
 		this.vehicleList = vehicleList;
 		this.selectedStop = selectedStop;
 		
-		// Layout
+		// Panel setting
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setBackground(new Color(54, 116, 181));
 		
 		// Back Button
 		JPanel backContainer = new JPanel();
@@ -126,17 +124,24 @@ public class BusStopDetailPanel extends JPanel  {
 	}
 	
 	public JPanel createVehiclePanel(Vehicle vehicle, int i) {
+		// Color
+		Color bgColor = ProgramColor.BLUE;
+		Color topicColor = Color.white;
+		Color subHeadingColor = Color.white;
+		Color detailColor = ProgramColor.LIGHT_GREEN;
+		
 		// Vehicle Container Panel (BoxLayout(X_AXIS))
 		JPanel containerPanel = new JPanel();
 		containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.X_AXIS));
-		// containerPanel.setBackground(Color.blue);
+		containerPanel.setBackground(bgColor);
 		
 		// Border
-		containerPanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+		containerPanel.setBorder(BorderFactory.createLineBorder(ProgramColor.LIGHT_BLUE, 2));
 		
 		// Detail Panel
 		JPanel vehiclePanel = new JPanel();
 		vehiclePanel.setLayout(new BoxLayout(vehiclePanel, BoxLayout.Y_AXIS));
+		vehiclePanel.setBackground(bgColor);
 		// vehiclePanel.setBackground(Color.blue);
 		
 		// Decorations
@@ -157,8 +162,10 @@ public class BusStopDetailPanel extends JPanel  {
 		// Labels
 		namelb[i] = new JLabel(vehicle.getVehicleName());
 		namelb[i].setFont(topicFont);
+		namelb[i].setForeground(topicColor);
 		headingContainer.add(namelb[i]);
 		headingContainer.add(Box.createRigidArea(new Dimension(120, 0)));
+		headingContainer.setBackground(bgColor);
 		
 		// Vehicle image
 		JLabel vehicleImagelb = new JLabel();
@@ -175,45 +182,54 @@ public class BusStopDetailPanel extends JPanel  {
 		
 		JLabel routelb = new JLabel(String.format("%s -> %s", vehicle.getFrom().getStopName(), vehicle.getTo().getStopName()));
 		routelb.setFont(subHeadingFont);
+		routelb.setForeground(subHeadingColor);
 		vehiclePanel.add(routelb);
 		
 		licenselb[i] = new JLabel(vehicle.getVehicleLicence());
 		licenselb[i].setFont(subHeadingFont);
+		licenselb[i].setForeground(detailColor);
 		vehiclePanel.add(licenselb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
 		poslb[i] = new JLabel(String.format("Vehicle Positions: (%.2f, %.2f)", vehicle.getVehiclePostion()[0], vehicle.getVehiclePostion()[1]));
 		poslb[i].setFont(detailFont);
+		poslb[i].setForeground(detailColor);
 		vehiclePanel.add(poslb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		vehicleStoplb[i] = new JLabel(String.format("Current stop %s", vehicle.getCurrentStop().getStopName()));
 		vehicleStoplb[i].setFont(detailFont);
+		vehicleStoplb[i].setForeground(detailColor);
 		vehiclePanel.add(vehicleStoplb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		JLabel nextStoplb = new JLabel(String.format("Next stop %s", vehicle.getNextStop().getStopName()));
 		nextStoplb.setFont(detailFont);
+		nextStoplb.setForeground(detailColor);
 		vehiclePanel.add(nextStoplb);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
 		directionlb[i] = new JLabel(String.format("Vehicle is heading %s", vehicle.vehicleDirection()));
 		directionlb[i].setFont(detailFont);
+		directionlb[i].setForeground(detailColor);
 		vehiclePanel.add(directionlb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		departorarrivelb[i] = new JLabel(String.format("Vehicle is %s", vehicle.departOrArrive(selectedStop)));
 		departorarrivelb[i].setFont(detailFont);
+		departorarrivelb[i].setForeground(detailColor);
 		vehiclePanel.add(departorarrivelb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		distlb[i] = new JLabel(String.format("Distance: %.2f", vehicle.distanceToTargetStop(selectedStop)));
 		distlb[i].setFont(detailFont);
+		distlb[i].setForeground(detailColor);
 		vehiclePanel.add(distlb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		etalb[i] = new JLabel(String.format("ETA: %.2f", vehicle.getEstimatedTime(selectedStop)));
 		etalb[i].setFont(detailFont);
+		etalb[i].setForeground(detailColor);
 		vehiclePanel.add(etalb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
