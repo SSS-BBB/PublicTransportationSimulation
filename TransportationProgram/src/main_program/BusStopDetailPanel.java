@@ -28,7 +28,7 @@ public class BusStopDetailPanel extends JPanel  {
 	public BusStopDetailPanel(BusStopDetailFrame detailFrame, MapData map, Vehicle[] vehicleList, StopSign selectedStop) {
 		
 		// TODO: color this window
-		// repaint();
+		setBackground(new Color(54, 116, 181));
 		
 		// Value Setting
 		this.detailFrame = detailFrame;
@@ -74,18 +74,22 @@ public class BusStopDetailPanel extends JPanel  {
 		backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		backContainer.add(backBtn);
 		backContainer.add(Box.createHorizontalGlue());
+		backContainer.setBackground(new Color(54, 116, 181));
 		
 		add(backContainer);
+		add(Box.createRigidArea(new Dimension(0, 15)));
 		
 		// Stop Sign Detail
 		JLabel stopNamelb = new JLabel(selectedStop.getStopName() + " Stop");
 		stopNamelb.setAlignmentX(CENTER_ALIGNMENT);
 		stopNamelb.setFont(new Font("Tahoma", Font.BOLD, 42));
+		stopNamelb.setForeground(Color.white);
 		add(stopNamelb);
 		
 		JLabel stopIdlb = new JLabel(selectedStop.getStopID());
 		stopIdlb.setAlignmentX(CENTER_ALIGNMENT);
 		stopIdlb.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		stopIdlb.setForeground(Color.white);
 		add(stopIdlb);
 		
 		// For Debug Purpose

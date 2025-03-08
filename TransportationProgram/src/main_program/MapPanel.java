@@ -38,9 +38,11 @@ public class MapPanel extends JPanel implements Runnable {
 		this.mapScale = mapScale;
 		this.backBtnPos = new int[] {0, 0};
 		this.backBtnSize = new int[] {40, 40};
+		
+		setBackground(new Color(209, 248, 239));
 		setStopSignMapPos();
 		
-		this.stopClickListener = new StopClickListener(this);
+		this.stopClickListener = new MapClickListener(this);
 		addMouseListener(this.stopClickListener);
 	}
 	

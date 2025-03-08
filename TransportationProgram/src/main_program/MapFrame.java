@@ -24,6 +24,7 @@ public class MapFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,6 +40,7 @@ public class MapFrame extends JFrame {
 			}
 		});
 	}
+	*/
 
 	private MapData map;
 	
@@ -50,6 +52,7 @@ public class MapFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
 		setLocationRelativeTo(null);
+		
 		
 		// Set panel
 		JPanel containerPanel = new JPanel();

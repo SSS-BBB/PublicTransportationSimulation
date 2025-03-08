@@ -396,7 +396,9 @@ public abstract class Vehicle {
 		// update speed
 		Random rand = new Random();
 		// speed will not be the same all the time, so there might be some random increase or decrease of speed
-		double randVelocity = 2*rand.nextDouble() * averageSpeed;
+		// double randVelocity = 2*rand.nextDouble() * averageSpeed;
+		double randVelocity = rand.nextGaussian(averageSpeed, 1); // normal distribution random
+		if (randVelocity < 0) randVelocity = 0;
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), randVelocity);
 		
 		// current stop update analysis

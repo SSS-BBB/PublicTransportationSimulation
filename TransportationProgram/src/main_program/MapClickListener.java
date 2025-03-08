@@ -7,11 +7,11 @@ import maps.*;
 import stops.StopSign;
 import useful.*;
 
-public class StopClickListener implements MouseListener {
+public class MapClickListener implements MouseListener {
 	
 	private MapPanel panel; // Panel that this listener is currently in
 	
-	public StopClickListener(MapPanel panel) {
+	public MapClickListener(MapPanel panel) {
 		this.panel = panel;
 	}
 	
@@ -41,7 +41,8 @@ public class StopClickListener implements MouseListener {
 		int[] backSize = panel.getBackBtnSize();
 		if (isInRect(mousePosI, backPos, backSize)) {
 			// Back button clicked
-			// TODO: go back to map selection frame
+			new MapSelectionFrame();
+			
 			panel.stopLoop();
 			return;
 		}

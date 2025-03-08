@@ -6,6 +6,7 @@ import vehicles.Vehicle;
 
 public class MapData {
 	
+	protected String mapName;
 	protected StopSign[] stops;
 	protected Vehicle[] vehicles;
 	
@@ -30,6 +31,10 @@ public class MapData {
 	
 	public Vehicle[] getAllVehicles() {
 		return vehicles;
+	}
+	
+	public String getName() {
+		return mapName;
 	}
 	
 	public Vehicle toggleVehicleShowRouteStatus(String vehicleLicense) {
