@@ -1,5 +1,7 @@
 package vehicles;
 
+import java.awt.Color;
+
 import stops.*;
 
 public class Van extends AirConditionedVehicle {
@@ -8,6 +10,8 @@ public class Van extends AirConditionedVehicle {
 			double temperature) {
 		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/busIcon.png");
 		setSpeedVariance(1.2);
+		
+		this.routeColor = Color.gray;
 	}
 	
 	@Override

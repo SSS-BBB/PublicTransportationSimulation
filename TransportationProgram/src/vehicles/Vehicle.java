@@ -1,5 +1,6 @@
 package vehicles;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
@@ -32,6 +33,7 @@ public abstract class Vehicle {
 	
 	protected String imagePath;
 	protected BufferedImage vehicleImage;
+	protected Color routeColor;
 	
 	
 	
@@ -72,7 +74,7 @@ public abstract class Vehicle {
 		setWaitingTime();
 		
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
-		showRoute = false;
+		showRoute = true;
 		showVehicle = true;
 		
 		// create image
@@ -110,7 +112,7 @@ public abstract class Vehicle {
 		setWaitingTime();
 		
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
-		showRoute = false;
+		showRoute = true;
 		showVehicle = true;
 		
 		// create image
@@ -220,6 +222,10 @@ public abstract class Vehicle {
 	
 	public StopSign getNextStop() {
 		return nextStop;
+	}
+	
+	public Color getRouteColor() {
+		return routeColor;
 	}
 	
 	public boolean doShowRoute() {

@@ -2,6 +2,7 @@ package vehicles;
 
 import java.util.Random;
 
+import program_designs.ProgramColor;
 import stops.StopSign;
 
 public class SmartBus extends AirConditionedVehicle {
@@ -20,7 +21,9 @@ public class SmartBus extends AirConditionedVehicle {
 		this.maxSeatAmount = 30;
 		this.peopleOnBus = rand.nextInt(maxPeopleOnBus + 1);
 		this.seatLeft = Math.max(0, maxSeatAmount - peopleOnBus);
+		this.routeColor = ProgramColor.LIGHT_BLUE;
 		setSpeedVariance(0.5);
+		
 	}
 	
 	@Override

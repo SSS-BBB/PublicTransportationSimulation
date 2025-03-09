@@ -1,5 +1,8 @@
 package vehicles;
 
+import java.awt.Color;
+
+import program_designs.ProgramColor;
 import stops.StopSign;
 
 public class Train extends Vehicle {
@@ -9,6 +12,7 @@ public class Train extends Vehicle {
 		// TODO: add image
 		setSpeedVariance(0);
 		stationWait = 0.0167;
+		this.routeColor = new Color(244,164,96);
 	}
 
 	@Override

@@ -195,7 +195,7 @@ public class MapPanel extends JPanel implements Runnable {
 					int x2 = (int) ( nextStop.getPosition()[0]*mapScale );
 					int y2 = (int) ( nextStop.getPosition()[1]*mapScale );
 					
-					g2d.setColor(ProgramColor.LIGHT_BLUE);
+					g2d.setColor(vehicle.getRouteColor());
 					g2d.drawLine(x1, y1, x2, y2);
 				}
 			}

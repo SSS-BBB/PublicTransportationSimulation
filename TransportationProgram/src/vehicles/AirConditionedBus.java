@@ -1,5 +1,6 @@
 package vehicles;
 
+import program_designs.ProgramColor;
 import stops.StopSign;
 
 public class AirConditionedBus extends AirConditionedVehicle {
@@ -9,6 +10,7 @@ public class AirConditionedBus extends AirConditionedVehicle {
 		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/busIcon.png");
 		// TODO: add image
 		setSpeedVariance(0.8);
+		this.routeColor = ProgramColor.LIGHT_BLUE;
 	}
 	
 	@Override

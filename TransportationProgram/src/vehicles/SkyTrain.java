@@ -1,5 +1,7 @@
 package vehicles;
 
+import java.awt.Color;
+
 import stops.StopSign;
 
 public class SkyTrain extends AirConditionedVehicle {
@@ -10,6 +12,7 @@ public class SkyTrain extends AirConditionedVehicle {
 		// TODO: add image
 		setSpeedVariance(0);
 		stationWait = 0.0167;
+		this.routeColor = Color.blue;
 	}
 	
 	@Override

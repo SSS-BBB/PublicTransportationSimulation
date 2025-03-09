@@ -106,7 +106,7 @@ public class MapData {
 		// show all vehicle on the map
 		for (Vehicle vehicle : vehicles) {
 			vehicle.updateShowVehicleStatus(true);
-			vehicle.updateShowRouteStatus(false);
+			vehicle.updateShowRouteStatus(true);
 		}
 	}
 	

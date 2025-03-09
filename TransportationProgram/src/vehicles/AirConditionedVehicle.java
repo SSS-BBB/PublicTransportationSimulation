@@ -2,7 +2,7 @@ package vehicles;
 
 import stops.StopSign;
 
-public class AirConditionedVehicle extends Vehicle {
+public abstract class AirConditionedVehicle extends Vehicle {
 	
 	private double temperature;
 	
@@ -15,11 +15,6 @@ public class AirConditionedVehicle extends Vehicle {
 	
 	public double getTemperature() {
 		return temperature;
-	}
-
-	@Override
-	public double fee(StopSign from, StopSign to) {
-		return 0;
 	}
 
 }
