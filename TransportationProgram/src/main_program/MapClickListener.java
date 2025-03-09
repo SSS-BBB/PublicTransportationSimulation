@@ -41,6 +41,7 @@ public class MapClickListener implements MouseListener {
 		int[] backSize = panel.getBackBtnSize();
 		if (isInRect(mousePosI, backPos, backSize)) {
 			// Back button clicked
+			panel.getMap().showAll();
 			new MapSelectionFrame();
 			
 			panel.stopLoop();

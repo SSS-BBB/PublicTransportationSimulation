@@ -156,6 +156,11 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		toCombo = new JComboBox<>(stopList);
 		toCombo.setPreferredSize(new Dimension(150, 30));
 		toCombo.setMaximumSize(toCombo.getPreferredSize());
+		toCombo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		toCombo.setBackground(ProgramColor.DROPDOWN_BACKGROUND);
+		toCombo.setForeground(Color.black);
+		toCombo.setBorder(BorderFactory.createEmptyBorder());
+		toCombo.setFont(detailFont);
 		comboBoxContainer.add(toCombo);
 		comboBoxContainer.add(Box.createRigidArea(new Dimension(margin, 0)));
 		calculateFeeBtn = new JButton("Calculate fee");

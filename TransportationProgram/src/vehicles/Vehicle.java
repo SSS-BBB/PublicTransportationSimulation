@@ -374,6 +374,8 @@ public abstract class Vehicle {
 		int currentStopIndex = getStopIndex(currentStop);
 		int targetStopIndex = getStopIndex(targetStop);
 		
+		if (targetStopIndex == currentStopIndex) return "Departing";
+		
 		if ( (targetStopIndex - currentStopIndex) > 0 == forward ) {
 			return "Arriving";
 		}

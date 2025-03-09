@@ -3,7 +3,7 @@ package maps;
 // List of all maps available
 public class MapList {
 	
-	public static MapData[] mapList = new MapData[] { new TestMap() };
+	public static MapData[] mapList = new MapData[] { new TestMap() , new TestMap2()};
 	
 	public static String[] getMapNameList() {
 		String[] mapNameList = new String[mapList.length];
