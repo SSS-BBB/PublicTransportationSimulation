@@ -6,7 +6,8 @@ import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 
 import maps.*;
-import program_colors.ProgramColor;
+import program_designs.ComponentDesign;
+import program_designs.ProgramColor;
 
 public class MapSelectionPanel extends JPanel implements ActionListener {
 	
@@ -30,6 +31,7 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 		
 		// Margin and Spacing
 		int margin = 20;
+		int spacing = 30;
 		
 		// Components
 		JLabel selectMapLb = new JLabel("Select Map");
@@ -40,21 +42,19 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 		add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		mapSelectComboBox = new JComboBox<>(MapList.getMapNameList());
-		mapSelectComboBox.setPreferredSize(new Dimension(200, 55));
+		mapSelectComboBox.setPreferredSize(new Dimension(280, 55));
 		mapSelectComboBox.setMaximumSize(mapSelectComboBox.getPreferredSize());
-		mapSelectComboBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		mapSelectComboBox.setBackground(ProgramColor.DROPDOWN_BACKGROUND);
 		mapSelectComboBox.setForeground(Color.black);
-		mapSelectComboBox.setBorder(BorderFactory.createEmptyBorder());
-		mapSelectComboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		mapSelectComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		mapSelectComboBox.setFocusable(false);
 		add(mapSelectComboBox);
-		add(Box.createRigidArea(new Dimension(0, margin)));
+		add(Box.createRigidArea(new Dimension(0, spacing)));
 		
 		selectMapBtn = new JButton("Select this map");
 		selectMapBtn.setAlignmentX(CENTER_ALIGNMENT);
 		selectMapBtn.addActionListener(this);
-		selectMapBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		// TODO: design button
+		ComponentDesign.buttonDesign(selectMapBtn, 150, 40, 16);
 		add(selectMapBtn);
 		
 		// Glue

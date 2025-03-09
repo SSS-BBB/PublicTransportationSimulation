@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import maps.MapData;
-import program_colors.ProgramColor;
+import program_designs.ProgramColor;
 import stops.StopSign;
 import vehicles.Vehicle;
 

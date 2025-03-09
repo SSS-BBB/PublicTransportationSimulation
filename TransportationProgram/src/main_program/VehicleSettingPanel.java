@@ -15,9 +15,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import maps.*;
+import program_designs.*;
 import vehicles.*;
 import stops.*;
-import program_colors.*;
 
 public class VehicleSettingPanel extends JPanel implements ActionListener {
 	
@@ -161,10 +161,12 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		toCombo.setForeground(Color.black);
 		toCombo.setBorder(BorderFactory.createEmptyBorder());
 		toCombo.setFont(detailFont);
+		toCombo.setFocusable(false);
 		comboBoxContainer.add(toCombo);
 		comboBoxContainer.add(Box.createRigidArea(new Dimension(margin, 0)));
 		calculateFeeBtn = new JButton("Calculate fee");
 		calculateFeeBtn.addActionListener(this);
+		ComponentDesign.buttonDesign(calculateFeeBtn, 118, 30);
 		comboBoxContainer.add(calculateFeeBtn);
 		vehicleSettingContainer.add(comboBoxContainer);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
@@ -238,6 +240,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 												selectedVehicle.doShowRoute() ? "Don't" : "Do"));
 		showRouteToggleBtn.addActionListener(this);
 		showRouteToggleBtn.setAlignmentX(CENTER_ALIGNMENT);
+		ComponentDesign.buttonDesign(showRouteToggleBtn, 140, 35);
 		vehicleSettingContainer.add(showRouteToggleBtn);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
@@ -245,12 +248,14 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 				selectedVehicle.doShowVehicle() ? "Don't" : "Do"));
 		showVehicleToggleBtn.addActionListener(this);
 		showVehicleToggleBtn.setAlignmentX(CENTER_ALIGNMENT);
+		ComponentDesign.buttonDesign(showVehicleToggleBtn, 150, 35);
 		vehicleSettingContainer.add(showVehicleToggleBtn);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
 		vehicleBtn = new JButton(selectedVehicle.getVehicleName());
 		vehicleBtn.addActionListener(this);
 		vehicleBtn.setAlignmentX(CENTER_ALIGNMENT);
+		ComponentDesign.buttonDesign(vehicleBtn, 100, 35);
 		vehicleSettingContainer.add(vehicleBtn);
 		
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, 20))); // margin bottom

@@ -10,9 +10,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import maps.*;
+import program_designs.*;
 import stops.*;
 import vehicles.*;
-import program_colors.*;
 
 public class BusStopDetailPanel extends JPanel  {
 	
