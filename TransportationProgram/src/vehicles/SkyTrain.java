@@ -2,13 +2,14 @@ package vehicles;
 
 import stops.StopSign;
 
-public class AirConditionedBus extends AirConditionedVehicle {
+public class SkyTrain extends AirConditionedVehicle {
 
-	public AirConditionedBus(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval,
+	public SkyTrain(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval,
 			double averageSpeed, double temperature) {
 		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/busIcon.png");
 		// TODO: add image
-		setSpeedVariance(0.8);
+		setSpeedVariance(0);
+		stationWait = 0.0167;
 	}
 	
 	@Override
@@ -19,10 +20,10 @@ public class AirConditionedBus extends AirConditionedVehicle {
 			System.out.println("Cannot find " + from.getStopID() + " and/or " + to.getStopID());
 			return -1.0;	
 		}
-		int floor = (int) Math.ceil(numberStation / 4.0);
+		int floor = (int) Math.ceil(numberStation / 1.0);
 		if (floor == 0) return 0.0; // same from and to
 		
-		return 10.0 + floor*2.0;
+		return 20.0 + floor*4.0;
 	}
 
 }

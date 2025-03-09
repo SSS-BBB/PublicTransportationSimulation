@@ -23,8 +23,10 @@ public abstract class Vehicle {
 	protected boolean showRoute; // whether to show the vehicle route on the map
 	protected boolean showVehicle; // whether to show the vehicle on the map
 	protected double averageSpeed;
+	protected double speedVariance;
 	protected double waitInterval; // how long does it take for the vehicle to start driving when it just arrives at the 0th stop
 	protected double waiting; // time left before driver starts driving again
+	protected double stationWait; // waiting time when reach each station
 	protected double currentSpeed[]; // [vx, vy]
 	protected double position[]; // exact position of the vehicle
 	
@@ -43,6 +45,8 @@ public abstract class Vehicle {
 		this.waitInterval = waitInterval;
 		this.averageSpeed = averageSpeed;
 		this.imagePath = imagePath;
+		this.speedVariance = 1.0;
+		this.stationWait = 0.00167;
 		
 		
 		// randomize where the bus is
@@ -90,6 +94,7 @@ public abstract class Vehicle {
 		this.stops = stops;
 		this.waitInterval = waitInterval;
 		this.averageSpeed = averageSpeed;
+		this.speedVariance = 1.0;
 		this.imagePath = imagePath;
 		
 		this.currentStop = this.stops[stopIndex];
@@ -227,6 +232,10 @@ public abstract class Vehicle {
 	
 	public String getImagePath() {
 		return imagePath;
+	}
+	
+	public void setSpeedVariance(double speedVariance) {
+		this.speedVariance = speedVariance;
 	}
 	
 	public void updateShowRouteStatus(boolean status) {
@@ -399,7 +408,7 @@ public abstract class Vehicle {
 		Random rand = new Random();
 		// speed will not be the same all the time, so there might be some random increase or decrease of speed
 		// double randVelocity = 2*rand.nextDouble() * averageSpeed;
-		double randVelocity = rand.nextGaussian(averageSpeed, 1); // normal distribution random
+		double randVelocity = rand.nextGaussian(averageSpeed, speedVariance); // normal distribution random
 		if (randVelocity < 0) randVelocity = 0;
 		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), randVelocity);
 		
@@ -438,6 +447,7 @@ public abstract class Vehicle {
 	
 	protected void onUpdateCurrentStop() {
 		// when current stop is updated
+		waiting = stationWait;
 	}
 	
 	// get index of an array given the stop

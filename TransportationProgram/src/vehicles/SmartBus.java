@@ -4,7 +4,7 @@ import java.util.Random;
 
 import stops.StopSign;
 
-public class SmartBus extends AirConditionedBus {
+public class SmartBus extends AirConditionedVehicle {
 	
 	private int peopleOnBus;
 	private int maxPeopleOnBus; // maximum number of people on the bus
@@ -13,13 +13,14 @@ public class SmartBus extends AirConditionedBus {
 	
 	public SmartBus(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval,
 			double averageSpeed, double temperature) {
-		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature);
-		
+		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/busIcon.png");
+		// TODO: add image
 		Random rand = new Random();
 		this.maxPeopleOnBus = 40;
 		this.maxSeatAmount = 30;
 		this.peopleOnBus = rand.nextInt(maxPeopleOnBus + 1);
 		this.seatLeft = Math.max(0, maxSeatAmount - peopleOnBus);
+		setSpeedVariance(0.5);
 	}
 	
 	@Override
@@ -45,6 +46,8 @@ public class SmartBus extends AirConditionedBus {
 	
 	@Override
 	public void onUpdateCurrentStop() {
+		super.onUpdateCurrentStop();
+		
 		// random people going in and out on each stop (assuming the tendency for people to get on and off each stop is equal)
 		Random rand = new Random();
 		

@@ -22,6 +22,17 @@ public class StopSign {
 			e.printStackTrace();
 		}
 	}
+	
+	public StopSign(String stopName, String stopID, double[] position, String stopSignImagePath) {
+		this.stopName = stopName;
+		this.position = position;
+		this.stopID = stopID;
+		try {
+			signIcon = ImageIO.read(getClass().getResourceAsStream(stopSignImagePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public String getStopName() {
 		return stopName;

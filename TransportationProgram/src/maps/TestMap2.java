@@ -1,10 +1,7 @@
 package maps;
 
-import stops.StopSign;
-import vehicles.AirConditionedBus;
-import vehicles.NormalBus;
-import vehicles.SmartBus;
-import vehicles.Vehicle;
+import stops.*;
+import vehicles.*;
 
 public class TestMap2 extends MapData {
 	
@@ -28,6 +25,7 @@ public class TestMap2 extends MapData {
 		};
 		
 		mapName = "Test Map 2";
+		mapScale = 4;
 	}
 	
 }

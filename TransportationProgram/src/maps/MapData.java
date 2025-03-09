@@ -1,12 +1,16 @@
 package maps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import stops.StopSign;
-import vehicles.NormalBus;
-import vehicles.Vehicle;
+import vehicles.*;
 
 public class MapData {
 	
 	protected String mapName;
+	protected int mapScale;
+	
 	protected StopSign[] stops;
 	protected Vehicle[] vehicles;
 	
@@ -21,7 +25,8 @@ public class MapData {
 	
 	public void updateData() {
 		for (Vehicle vehicle : vehicles) {
-			vehicle.update(1);
+			vehicle.update(0.01);
+			// vehicle.update(0.25);
 		}
 	}
 	
@@ -35,6 +40,30 @@ public class MapData {
 	
 	public String getName() {
 		return mapName;
+	}
+	
+	public int getMapScale() {
+		return mapScale;
+	}
+	
+	public void setStopSign(StopSign[][] allStops) {
+		// combine all stops sign from each list
+		ArrayList<StopSign> mapStopList = new ArrayList<>();
+		ArrayList<String> stopsId = new ArrayList<>();
+		for (StopSign[] vehicleStops : allStops) {
+			for (StopSign stop : vehicleStops) {
+				if (!stopsId.contains(stop.getStopID())) {
+					// this stop is not already on the list
+					mapStopList.add(stop);
+					stopsId.add(stop.getStopID());
+				}
+			}
+		}
+		
+		stops = new StopSign[mapStopList.size()];
+		for (int i = 0; i < stops.length; i++) {
+			stops[i] = mapStopList.get(i);
+		}
 	}
 	
 	public Vehicle toggleVehicleShowRouteStatus(String vehicleLicense) {

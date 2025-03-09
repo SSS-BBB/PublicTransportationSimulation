@@ -58,7 +58,7 @@ public class MapFrame extends JFrame {
 		JPanel containerPanel = new JPanel();
 		containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));
 		
-		MapPanel mapPanel = new MapPanel(map, this, 4);
+		MapPanel mapPanel = new MapPanel(map, this, map.getMapScale());
 		mapPanel.setLayout(null);
 		containerPanel.add(mapPanel);
 		

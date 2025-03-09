@@ -29,6 +29,7 @@ public class TestMap extends MapData {
 		};
 		
 		mapName = "Test Map";
+		mapScale = 4;
 		
 		// vehicles = new Vehicle[] { new NormalBus("Test1", "000", stops, 0.5, 1.5) }; // single vehicle test
 	}

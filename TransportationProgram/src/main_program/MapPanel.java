@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -124,15 +125,39 @@ public class MapPanel extends JPanel implements Runnable {
 			StopSign[] stopSignArray = map.getAllStopSigns();
 			
 			if (stopSignArray[i].getSignIcon() != null) {
-				g2d.drawImage(stopSignArray[i].getSignIcon(), 
-						stopSignMapPositions[i][0], stopSignMapPositions[i][1], 
-						20, 20, null);
+				// drawing at center
+				drawImageAtCenter(g2d, stopSignArray[i].getSignIcon(), 
+						stopSignMapPositions[i][0], stopSignMapPositions[i][1],
+						20, 20);
 			}
 			else {
 				g2d.setColor(ProgramColor.LIGHT_GREEN);
-				g2d.fillRect(stopSignMapPositions[i][0], stopSignMapPositions[i][1], 10, 10);
+				
+				// drawing at center
+				g2d.setColor(Color.black);
+				drawRectAtCenter(g2d, 
+						stopSignMapPositions[i][0], stopSignMapPositions[i][1],
+						10, 10);
 			}
 		}
+	}
+	
+	public void drawImageAtCenter(Graphics2D g2d, BufferedImage image, 
+			int x_center, int y_center, 
+			int width, int height) {
+		int x_draw = x_center - width/2;
+		int y_draw = y_center - height/2;
+		
+		g2d.drawImage(image, x_draw, y_draw, width, height, null);
+	}
+	
+	public void drawRectAtCenter(Graphics2D g2d, 
+			int x_center, int y_center,
+			int width, int height) {
+		int x_draw = x_center - width/2;
+		int y_draw = y_center - height/2;
+		
+		g2d.fillRect(x_draw, y_draw, width, height);
 	}
 	
 	public void setVehicleIcon(Graphics2D g2d) {
@@ -146,11 +171,13 @@ public class MapPanel extends JPanel implements Runnable {
 				int posY = (int) ( vehicle.getVehiclePostion()[1]*mapScale );
 				
 				if (vehicle.getVehicleImage() != null) {
-					g2d.drawImage(vehicle.getVehicleImage(), posX, posY, 20, 20, null);				
+					drawImageAtCenter(g2d, vehicle.getVehicleImage(), posX, posY, 20, 20);
+					// g2d.drawImage(vehicle.getVehicleImage(), posX, posY, 20, 20, null);				
 				}
 				else {
 					g2d.setColor(ProgramColor.BLUE);
-					g2d.fillRect(posX, posY, 20, 20);
+					drawRectAtCenter(g2d, posX, posY, 20, 20);
+					// g2d.fillRect(posX, posY, 20, 20);
 				}
 			}
 			

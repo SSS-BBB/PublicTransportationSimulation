@@ -186,9 +186,9 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
 		boolean space = false;
-		if (selectedVehicle instanceof AirConditionedBus) {
+		if (selectedVehicle instanceof AirConditionedVehicle) {
 			// Air-Conditioned Bus components
-			AirConditionedBus airBus = (AirConditionedBus) selectedVehicle;
+			AirConditionedVehicle airBus = (AirConditionedVehicle) selectedVehicle;
 			JLabel templb = new JLabel(String.format("Temperature: %.2f°C", airBus.getTemperature()));
 			templb.setFont(detailFont);
 			templb.setAlignmentX(CENTER_ALIGNMENT);

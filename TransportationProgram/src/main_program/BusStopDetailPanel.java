@@ -78,7 +78,7 @@ public class BusStopDetailPanel extends JPanel  {
 		add(Box.createRigidArea(new Dimension(0, 15)));
 		
 		// Stop Sign Detail
-		JLabel stopNamelb = new JLabel(selectedStop.getStopName() + " Stop");
+		JLabel stopNamelb = new JLabel(selectedStop.getStopName());
 		stopNamelb.setAlignmentX(CENTER_ALIGNMENT);
 		stopNamelb.setFont(new Font("Tahoma", Font.BOLD, 42));
 		stopNamelb.setForeground(Color.white);
@@ -164,7 +164,7 @@ public class BusStopDetailPanel extends JPanel  {
 		namelb[i].setFont(topicFont);
 		namelb[i].setForeground(topicColor);
 		headingContainer.add(namelb[i]);
-		headingContainer.add(Box.createRigidArea(new Dimension(120, 0)));
+		headingContainer.add(Box.createRigidArea(new Dimension(200, 0)));
 		headingContainer.setBackground(bgColor);
 		
 		// Vehicle image
@@ -227,7 +227,7 @@ public class BusStopDetailPanel extends JPanel  {
 		vehiclePanel.add(distlb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
-		etalb[i] = new JLabel(String.format("ETA: %.2f", vehicle.getEstimatedTime(selectedStop)));
+		etalb[i] = new JLabel(String.format("ETA: %.2f minutes", vehicle.getEstimatedTime(selectedStop)*60.0));
 		etalb[i].setFont(detailFont);
 		etalb[i].setForeground(detailColor);
 		vehiclePanel.add(etalb[i]);

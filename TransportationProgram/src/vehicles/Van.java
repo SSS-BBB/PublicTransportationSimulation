@@ -1,14 +1,13 @@
 package vehicles;
 
-import stops.StopSign;
+import stops.*;
 
-public class AirConditionedBus extends AirConditionedVehicle {
+public class Van extends AirConditionedVehicle {
 
-	public AirConditionedBus(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval,
-			double averageSpeed, double temperature) {
+	public Van(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval, double averageSpeed,
+			double temperature) {
 		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/busIcon.png");
-		// TODO: add image
-		setSpeedVariance(0.8);
+		setSpeedVariance(1.2);
 	}
 	
 	@Override
@@ -22,7 +21,7 @@ public class AirConditionedBus extends AirConditionedVehicle {
 		int floor = (int) Math.ceil(numberStation / 4.0);
 		if (floor == 0) return 0.0; // same from and to
 		
-		return 10.0 + floor*2.0;
+		return 15.0 + floor*3.0;
 	}
 
 }
