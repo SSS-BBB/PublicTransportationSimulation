@@ -24,7 +24,7 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 		
 		// Panel setting
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		setBackground(ProgramColor.DARK_BLUE);
+		// setBackground(ProgramColor.DARK_BLUE);
 		
 		// Glue
 		add(Box.createVerticalGlue());
@@ -69,6 +69,22 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 			new MapFrame(MapList.getMapFromName(selectedMapName));
 			selectFrame.dispose();
 		}
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		// Background
+		super.paintComponent(g);
+		
+		Graphics2D g2d = (Graphics2D) g;
+		int width = getWidth();
+		int height = getHeight();
+		
+		Color color1 = ProgramColor.DARK_BLUE;
+		Color color2 = ProgramColor.LIGHT_GREEN;
+		GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
+		g2d.setPaint(gp);
+		g2d.fillRect(0, 0, width, height);
 	}
 	
 }

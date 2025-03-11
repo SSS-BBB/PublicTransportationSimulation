@@ -191,37 +191,39 @@ public class BusStopDetailPanel extends JPanel  {
 		vehiclePanel.add(licenselb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
+		/*
 		poslb[i] = new JLabel(String.format("Vehicle Positions: (%.2f, %.2f)", vehicle.getVehiclePostion()[0], vehicle.getVehiclePostion()[1]));
 		poslb[i].setFont(detailFont);
 		poslb[i].setForeground(detailColor);
 		vehiclePanel.add(poslb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
+		*/
 		
-		vehicleStoplb[i] = new JLabel(String.format("Current stop %s", vehicle.getCurrentStop().getStopName()));
+		vehicleStoplb[i] = new JLabel(String.format("Current stop: %s", vehicle.getCurrentStop().getStopName()));
 		vehicleStoplb[i].setFont(detailFont);
 		vehicleStoplb[i].setForeground(detailColor);
 		vehiclePanel.add(vehicleStoplb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
-		JLabel nextStoplb = new JLabel(String.format("Next stop %s", vehicle.getNextStop().getStopName()));
+		JLabel nextStoplb = new JLabel(String.format("Next stop: %s", vehicle.getNextStop().getStopName()));
 		nextStoplb.setFont(detailFont);
 		nextStoplb.setForeground(detailColor);
 		vehiclePanel.add(nextStoplb);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, spacing)));
 		
-		directionlb[i] = new JLabel(String.format("Vehicle is heading %s", vehicle.vehicleDirection()));
+		directionlb[i] = new JLabel(String.format("%s is heading %s", vehicle.getVehicleName(), vehicle.vehicleDirection()));
 		directionlb[i].setFont(detailFont);
 		directionlb[i].setForeground(detailColor);
 		vehiclePanel.add(directionlb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
-		departorarrivelb[i] = new JLabel(String.format("Vehicle is %s", vehicle.departOrArrive(selectedStop)));
+		departorarrivelb[i] = new JLabel(String.format("%s is %s", vehicle.getVehicleName(), vehicle.departOrArrive(selectedStop)));
 		departorarrivelb[i].setFont(detailFont);
 		departorarrivelb[i].setForeground(detailColor);
 		vehiclePanel.add(departorarrivelb[i]);
 		vehiclePanel.add(Box.createRigidArea(new Dimension(0, margin)));
 		
-		distlb[i] = new JLabel(String.format("Distance: %.2f", vehicle.distanceToTargetStop(selectedStop)));
+		distlb[i] = new JLabel(String.format("Distance: %.2f km", vehicle.distanceToTargetStop(selectedStop)));
 		distlb[i].setFont(detailFont);
 		distlb[i].setForeground(detailColor);
 		vehiclePanel.add(distlb[i]);

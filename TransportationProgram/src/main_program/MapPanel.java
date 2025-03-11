@@ -1,6 +1,5 @@
 package main_program;
 
-import java.awt.Color;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -41,7 +40,7 @@ public class MapPanel extends JPanel implements Runnable {
 		this.backBtnPos = new int[] {0, 0};
 		this.backBtnSize = new int[] {40, 40};
 		
-		setBackground(ProgramColor.DARK_BLUE);
+		// setBackground(ProgramColor.DARK_BLUE);
 		setStopSignMapPos();
 		
 		this.stopClickListener = new MapClickListener(this);
@@ -70,6 +69,17 @@ public class MapPanel extends JPanel implements Runnable {
 		
 		Graphics2D g2d = (Graphics2D) g;
 		
+		// Background
+		int width = getWidth();
+		int height = getHeight();
+				
+		Color color1 = ProgramColor.DARK_BLUE;
+		Color color2 = ProgramColor.BLUE;
+		GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
+		g2d.setPaint(gp);
+		g2d.fillRect(0, 0, width, height);
+		
+		// set objects
 		setStopSignIcon(g2d);
 		setVehicleIcon(g2d);
 		setBackBtn(g2d);
@@ -196,6 +206,7 @@ public class MapPanel extends JPanel implements Runnable {
 					int y2 = (int) ( nextStop.getPosition()[1]*mapScale );
 					
 					g2d.setColor(vehicle.getRouteColor());
+					g2d.setStroke(new BasicStroke(2)); // line thickness
 					g2d.drawLine(x1, y1, x2, y2);
 				}
 			}
