@@ -372,27 +372,15 @@ public abstract class Vehicle {
 			time += waiting;
 		}
 		
-		if ( (stopIndex - currentStopIndex) > 0 == forward ) {
-			// going the same way as the direction
-			time += numberOfStation(currentStop, stop) * stationWait;
-		}
-		
 		else if ( (stopIndex - currentStopIndex) > 0 && !forward ) {
 			// Vehicle going backward and forward again to reach the stop that we're at which means it will reach 0th stop and rest at some point
 			time += waitInterval;
-			
-			// stop time at each station
-			time += (numberOfStation(currentStop, stops[0]) + numberOfStation(stops[0], stop) - 2) * stationWait;
 		}
 		
 		else if ( (stopIndex - currentStopIndex) < 0 && forward ) {
 			// Vehicle going forward and backward again to reach the stop that we're at which means it will reach the last stop and rest at some point
 			time += waitInterval;
-			
-			// stop time at each station
-			time += (numberOfStation(currentStop, stops[stops.length-1]) + numberOfStation(stops[stops.length-1], stop) - 2) * stationWait;
 		}
-
 		
 		return time;
 	}
