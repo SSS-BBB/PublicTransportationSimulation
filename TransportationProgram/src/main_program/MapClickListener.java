@@ -27,10 +27,11 @@ public class MapClickListener implements MouseListener {
 			double[] stopPosConvert = new double[] { allStopSignPos[i][0], allStopSignPos[i][1] };
 			
 			// Stop Sign Clicked
-			if (UsefulFunc.distanceBetweenTwoPoints(mousePos, stopPosConvert) < 20) {
+			StopSign checkStopSign = panel.getStopSignList()[i];
+			if (UsefulFunc.distanceBetweenTwoPoints(mousePos, stopPosConvert) < Math.max(checkStopSign.getIconWidth(), checkStopSign.getIconHeight())) {
 				panel.getMapFrame().dispose();
 				panel.stopLoop();
-				new BusStopDetailFrame(panel.getMap(), panel.getVehicleList(), panel.getStopSignList()[i]);
+				new BusStopDetailFrame(panel.getMap(), panel.getVehicleList(), checkStopSign);
 				return;
 			}
 		}

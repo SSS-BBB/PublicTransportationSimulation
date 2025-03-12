@@ -3,7 +3,9 @@ package vehicles;
 import java.util.Random;
 
 import program_designs.ProgramColor;
+import stops.SkyTrainStopSign;
 import stops.StopSign;
+import stops.TrainStopSign;
 
 public class SmartBus extends AirConditionedVehicle {
 	
@@ -14,16 +16,31 @@ public class SmartBus extends AirConditionedVehicle {
 	
 	public SmartBus(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval,
 			double averageSpeed, double temperature) {
-		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/busIcon.png");
+		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/smartBusIcon.png");
 		// TODO: add image
 		Random rand = new Random();
 		this.maxPeopleOnBus = 40;
 		this.maxSeatAmount = 30;
 		this.peopleOnBus = rand.nextInt(maxPeopleOnBus + 1);
 		this.seatLeft = Math.max(0, maxSeatAmount - peopleOnBus);
-		this.routeColor = ProgramColor.LIGHT_BLUE;
-		setSpeedVariance(0.5);
+		this.routeColor = ProgramColor.DARK_BLUE;
+		setSpeedVariance(2.5);
 		
+		this.iconWidth = 22;
+		this.iconHeight = 22;
+		
+	}
+	
+	@Override
+	public boolean validStop() {
+		for (StopSign stop : stops) {
+			// cannot use train stop sign for non train vehicle
+			if (stop instanceof TrainStopSign) return false;
+			
+			// cannot use sky train stop sign for non sky train vehicle
+			else if (stop instanceof SkyTrainStopSign) return false;
+		}
+		return true;
 	}
 	
 	@Override

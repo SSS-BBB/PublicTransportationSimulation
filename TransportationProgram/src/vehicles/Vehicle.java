@@ -7,7 +7,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import stops.StopSign;
+import stops.*;
 import useful.*;
 
 public abstract class Vehicle {
@@ -33,6 +33,9 @@ public abstract class Vehicle {
 	
 	protected String imagePath;
 	protected BufferedImage vehicleImage;
+	protected int iconWidth;
+	protected int iconHeight;
+	
 	protected Color routeColor;
 	
 	
@@ -47,8 +50,10 @@ public abstract class Vehicle {
 		this.waitInterval = waitInterval;
 		this.averageSpeed = averageSpeed;
 		this.imagePath = imagePath;
-		this.speedVariance = 1.0;
+		this.speedVariance = 5.0;
 		this.stationWait = 0.00167;
+		this.iconWidth = 20;
+		this.iconHeight = 20;
 		
 		
 		// randomize where the bus is
@@ -83,8 +88,48 @@ public abstract class Vehicle {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		// check stop
+		if (!validStop()) {
+			System.out.println("Warning: invalid stop for " + vehicleName);
+		}
+		
 	}
 	
+	public abstract boolean validStop(); // what stop can use in this vehicle, and what can't
+	
+	/* 
+	public boolean validStop() {
+		if (!(this instanceof Train)) {
+			for (StopSign stop : stops) {
+				// cannot use train stop sign for non train vehicle
+				if (stop instanceof TrainStopSign) return false;
+			}
+		}
+		
+		if (!(this instanceof SkyTrain)) {
+			for (StopSign stop : stops) {
+				// cannot use sky train stop sign for non sky train vehicle
+				if (stop instanceof SkyTrainStopSign) return false;
+			}
+		}
+		
+		if (this instanceof Train) {
+			for (StopSign stop : stops) {
+				// train must use train stop sign
+				if (!(stop instanceof TrainStopSign)) return false;
+			}
+		}
+		
+		if (this instanceof SkyTrain) {
+			for (StopSign stop : stops) {
+				// sky train must use sky train stop sign
+				if (!(stop instanceof TrainStopSign)) return false;
+			}
+		}
+	}
+	*/
+	/*
 	public Vehicle(String vehicleName, String vehicleLicence, StopSign[] stops, 
 			double waitInterval, double averageSpeed,
 			int stopIndex, boolean forward,
@@ -96,11 +141,13 @@ public abstract class Vehicle {
 		this.stops = stops;
 		this.waitInterval = waitInterval;
 		this.averageSpeed = averageSpeed;
-		this.speedVariance = 1.0;
+		this.speedVariance = 5.0;
 		this.imagePath = imagePath;
 		
 		this.currentStop = this.stops[stopIndex];
 		this.forward = forward;
+		this.iconWidth = 20;
+		this.iconHeight = 20;
 		
 		// prevent some weird situation Ex. Vehicle is at the first stop, but somehow going backward
 		if (stopIndex == 0) forward = true;
@@ -122,6 +169,7 @@ public abstract class Vehicle {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	protected void setWaitingTime() {
 		// only set if the bus is at the first or last stop
@@ -198,6 +246,14 @@ public abstract class Vehicle {
 	
 	public double getAverageSpeed() {
 		return averageSpeed;
+	}
+	
+	public int getIconWidth() {
+		return iconWidth;
+	}
+	
+	public int getIconHeight() {
+		return iconHeight;
 	}
 	
 	public StopSign getCurrentStop() {

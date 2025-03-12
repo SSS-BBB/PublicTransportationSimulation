@@ -124,7 +124,9 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		JLabel vehicleImagelb = new JLabel();
 		ImageIcon vehicleIcon = new ImageIcon(getClass().getResource(selectedVehicle.getImagePath()));
 		if (vehicleIcon != null) {
-			Image vehicleImg = vehicleIcon.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+			Image vehicleImg = vehicleIcon.getImage().getScaledInstance(
+					selectedVehicle.getIconWidth() + 15, selectedVehicle.getIconHeight() + 15, 
+					Image.SCALE_DEFAULT);
 			vehicleImagelb.setIcon(new ImageIcon(vehicleImg));
 			imageContainer.add(vehicleImagelb);
 			vehicleSettingContainer.add(imageContainer); // for some reason you need jpanel to center the icon

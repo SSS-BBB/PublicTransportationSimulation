@@ -138,7 +138,7 @@ public class MapPanel extends JPanel implements Runnable {
 				// drawing at center
 				drawImageAtCenter(g2d, stopSignArray[i].getSignIcon(), 
 						stopSignMapPositions[i][0], stopSignMapPositions[i][1],
-						20, 20);
+						stopSignArray[i].getIconWidth(), stopSignArray[i].getIconHeight());
 			}
 			else {
 				g2d.setColor(ProgramColor.LIGHT_GREEN);
@@ -181,7 +181,8 @@ public class MapPanel extends JPanel implements Runnable {
 				int posY = (int) ( vehicle.getVehiclePostion()[1]*mapScale );
 				
 				if (vehicle.getVehicleImage() != null) {
-					drawImageAtCenter(g2d, vehicle.getVehicleImage(), posX, posY, 20, 20);
+					drawImageAtCenter(g2d, vehicle.getVehicleImage(), posX, posY, 
+							vehicle.getIconWidth(), vehicle.getIconHeight());
 					// g2d.drawImage(vehicle.getVehicleImage(), posX, posY, 20, 20, null);				
 				}
 				else {

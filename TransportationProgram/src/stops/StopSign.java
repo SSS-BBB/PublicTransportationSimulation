@@ -7,26 +7,28 @@ import javax.imageio.ImageIO;
 
 public class StopSign {
 	
-	private String stopName;
-	private String stopID; // unique for every stop
-	private double[] position;
-	private BufferedImage signIcon;
+	protected String stopName;
+	protected String stopID; // unique for every stop
+	protected double[] position;
+	
+	protected BufferedImage signIcon;
+	protected int iconWidth, iconHeight;
 	
 	public StopSign(String stopName, String stopID, double[] position) {
 		this.stopName = stopName;
 		this.position = position;
 		this.stopID = stopID;
+		this.iconWidth = 22;
+		this.iconHeight = 22;
 		try {
-			signIcon = ImageIO.read(getClass().getResourceAsStream("/icons/blueBusStopSign.png"));
+			signIcon = ImageIO.read(getClass().getResourceAsStream("/icons/busStopIcon.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public StopSign(String stopName, String stopID, double[] position, String stopSignImagePath) {
-		this.stopName = stopName;
-		this.position = position;
-		this.stopID = stopID;
+		this(stopName, stopID, position);
 		try {
 			signIcon = ImageIO.read(getClass().getResourceAsStream(stopSignImagePath));
 		} catch (IOException e) {
@@ -48,6 +50,14 @@ public class StopSign {
 	
 	public BufferedImage getSignIcon() {
 		return signIcon;
+	}
+	
+	public int getIconWidth() {
+		return iconWidth;
+	}
+	
+	public int getIconHeight() {
+		return iconHeight;
 	}
 	
 }

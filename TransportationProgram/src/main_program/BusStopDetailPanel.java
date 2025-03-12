@@ -171,7 +171,8 @@ public class BusStopDetailPanel extends JPanel  {
 		JLabel vehicleImagelb = new JLabel();
 		ImageIcon vehicleIcon = new ImageIcon(getClass().getResource(vehicle.getImagePath()));
 		if (vehicleIcon != null) {
-			Image vehicleImg = vehicleIcon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+			Image vehicleImg = vehicleIcon.getImage().getScaledInstance(
+					vehicle.getIconWidth() + 10, vehicle.getIconHeight() + 10, Image.SCALE_DEFAULT);
 			vehicleImagelb.setIcon(new ImageIcon(vehicleImg));
 			
 			headingContainer.add(vehicleImagelb);
