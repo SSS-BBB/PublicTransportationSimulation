@@ -1,5 +1,7 @@
 package vehicles;
 
+import java.awt.Color;
+
 import program_designs.ProgramColor;
 import stops.SkyTrainStopSign;
 import stops.StopSign;
@@ -9,7 +11,7 @@ public class NormalBus extends Vehicle {
 
 	public NormalBus(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval, double averageSpeed) {
 		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, "/icons/busIcon.png");
-		this.routeColor = ProgramColor.LIGHT_BLUE;
+		this.routeColor = Color.red;
 	}
 	
 	/*

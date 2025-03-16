@@ -8,9 +8,8 @@ public class SkyTrainStopSign extends StopSign {
 
 	public SkyTrainStopSign(String stopName, String stopID, double[] position) {
 		super(stopName, stopID, position);
-		// TODO: add image
 		try {
-			signIcon = ImageIO.read(getClass().getResourceAsStream("/icons/blueBusStopSign.png"));
+			signIcon = ImageIO.read(getClass().getResourceAsStream("/icons/btsLogo.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

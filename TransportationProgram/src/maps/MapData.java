@@ -46,6 +46,21 @@ public class MapData {
 		return mapScale;
 	}
 	
+	public StopSign[] getStopsFromIndex(int[] indexes) {
+		StopSign[] stopList = new StopSign[indexes.length];
+		for (int i = 0; i < indexes.length; i++) {
+			int index = indexes[i];
+			if (index >= stops.length) {
+				System.out.println(index + " is out of bounds");
+			}
+			else {
+				stopList[i] = stops[index];
+			}
+		}
+		
+		return stopList;
+	}
+	
 	public void setStopSign(StopSign[][] allStops) {
 		// combine all stops sign from each list
 		ArrayList<StopSign> mapStopList = new ArrayList<>();
@@ -63,6 +78,16 @@ public class MapData {
 		stops = new StopSign[mapStopList.size()];
 		for (int i = 0; i < stops.length; i++) {
 			stops[i] = mapStopList.get(i);
+		}
+	}
+	
+	// scale map position from pixel unit to km unit
+	public void scalePixelToKm(double[] scale) {
+		for (StopSign stop : stops) {
+			double[] scaledPosition = stop.getPosition();
+			scaledPosition[0] /= scale[0];
+			scaledPosition[1] /= scale[1];
+			stop.setPosition(scaledPosition);
 		}
 	}
 	

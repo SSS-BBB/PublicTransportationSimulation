@@ -35,6 +35,10 @@ public class StopSign {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setPosition(double[] position) {
+		this.position = position;
+	}
 
 	public String getStopName() {
 		return stopName;
