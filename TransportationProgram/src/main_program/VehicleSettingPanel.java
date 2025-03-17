@@ -221,6 +221,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		if (space)
 			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing-margin))); // do space if the vehicle is not normal bus
 		
+		/*
 		showRoutelb = new JLabel(String.format("Show route of this vehicle on the map: %s", 
 										selectedVehicle.doShowRoute() ? "Yes": "No"));
 		showRoutelb.setAlignmentX(CENTER_ALIGNMENT);
@@ -228,6 +229,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		showRoutelb.setForeground(detailColor);
 		vehicleSettingContainer.add(showRoutelb);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+		*/
 		
 		showVehiclelb = new JLabel(String.format("Show this vehicle on the map: %s", 
 										selectedVehicle.doShowVehicle() ? "Yes": "No"));
@@ -238,6 +240,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		// Toggle Buttons
+		/*
 		showRouteToggleBtn = new JButton(String.format("%s show route", 
 												selectedVehicle.doShowRoute() ? "Don't" : "Do"));
 		showRouteToggleBtn.addActionListener(this);
@@ -245,6 +248,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		ComponentDesign.buttonDesign(showRouteToggleBtn, 140, 35);
 		vehicleSettingContainer.add(showRouteToggleBtn);
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
+		*/
 		
 		showVehicleToggleBtn = new JButton(String.format("%s show vehicle", 
 				selectedVehicle.doShowVehicle() ? "Don't" : "Do"));
@@ -271,6 +275,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		/*
 		if (e.getSource() == showRouteToggleBtn) {
 			selectedVehicle = map.toggleVehicleShowRouteStatus(selectedVehicle.getVehicleLicence());
 			
@@ -289,8 +294,9 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 			showRouteToggleBtn.setText(String.format("%s show route", 
 												selectedVehicle.doShowRoute() ? "Don't" : "Do"));
 		}
+		*/
 		
-		else if (e.getSource() == showVehicleToggleBtn) {
+		if (e.getSource() == showVehicleToggleBtn) {
 			selectedVehicle = map.toggleShowVehicleStatus(selectedVehicle.getVehicleLicence());
 			
 			if (selectedVehicle == null)
