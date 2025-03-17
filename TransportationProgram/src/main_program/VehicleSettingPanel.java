@@ -211,16 +211,6 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		if (space)
 			vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, spacing-margin))); // do space if the vehicle is not normal bus
 		
-		/*
-		showRoutelb = new JLabel(String.format("Show route of this vehicle on the map: %s", 
-										selectedVehicle.doShowRoute() ? "Yes": "No"));
-		showRoutelb.setAlignmentX(CENTER_ALIGNMENT);
-		showRoutelb.setFont(detailFont);
-		showRoutelb.setForeground(detailColor);
-		vehicleSettingContainer.add(showRoutelb);
-		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
-		*/
-		
 		showVehiclelb = new JLabel(String.format("Show this vehicle on the map: %s", 
 										selectedVehicle.doShowVehicle() ? "Yes": "No"));
 		showVehiclelb.setAlignmentX(CENTER_ALIGNMENT);
@@ -230,15 +220,6 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
 		
 		// Toggle Buttons
-		/*
-		showRouteToggleBtn = new JButton(String.format("%s show route", 
-												selectedVehicle.doShowRoute() ? "Don't" : "Do"));
-		showRouteToggleBtn.addActionListener(this);
-		showRouteToggleBtn.setAlignmentX(CENTER_ALIGNMENT);
-		ComponentDesign.buttonDesign(showRouteToggleBtn, 140, 35);
-		vehicleSettingContainer.add(showRouteToggleBtn);
-		vehicleSettingContainer.add(Box.createRigidArea(new Dimension(0, margin)));
-		*/
 		
 		showVehicleToggleBtn = new JButton(String.format("%s show vehicle", 
 				selectedVehicle.doShowVehicle() ? "Don't" : "Do"));
@@ -265,26 +246,6 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/*
-		if (e.getSource() == showRouteToggleBtn) {
-			selectedVehicle = map.toggleVehicleShowRouteStatus(selectedVehicle.getVehicleLicence());
-			
-			if (selectedVehicle == null)
-			{
-				
-				System.out.println("Cannot find " + selectedVehicle.getVehicleLicence());
-				return;
-			}
-			
-			// set label text
-			showRoutelb.setText(String.format("Show route of this vehicle on the map: %s", 
-								selectedVehicle.doShowRoute() ? "Yes": "No"));
-			
-			// set button text
-			showRouteToggleBtn.setText(String.format("%s show route", 
-												selectedVehicle.doShowRoute() ? "Don't" : "Do"));
-		}
-		*/
 		
 		if (e.getSource() == showVehicleToggleBtn) {
 			selectedVehicle = map.toggleShowVehicleStatus(selectedVehicle.getVehicleLicence());
@@ -351,24 +312,5 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		return selectedVehicle.fee(from, to);
 		
 	}
-	
-	/* 
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		BufferedImage bg = null;
-		try {
-			bg = ImageIO.read(getClass().getResource("/backgrounds/chillguy.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if (bg != null) {
-			g.drawImage(bg, 0, 0, vehicleFrame.getWidth(), vehicleFrame.getHeight(), null);
-		}
-		else {
-			vehicleFrame.setBackground(Color.white);
-		}
-	}
-	*/
 	
 }

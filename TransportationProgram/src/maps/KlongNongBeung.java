@@ -7,7 +7,7 @@ public class KlongNongBeung extends MapData {
 	
 	public KlongNongBeung() {
 		
-		this.mapName = "KlongNongBeung";
+		this.mapName = "Klong Nong Beung";
 		this.mapScale = 77;
 		
 		this.stops = new StopSign[] { 

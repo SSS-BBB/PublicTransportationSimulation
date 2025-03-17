@@ -7,27 +7,6 @@ import maps.*;
 public class MapFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// Set map
-					MapData testMap = new TestMap();
-					
-					// Set frame
-					MapFrame frame = new MapFrame(testMap);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 	
 	public MapFrame(MapData map) {
 		

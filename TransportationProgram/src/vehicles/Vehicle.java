@@ -98,79 +98,6 @@ public abstract class Vehicle {
 	
 	public abstract boolean validStop(); // what stop can use in this vehicle, and what can't
 	
-	/* 
-	public boolean validStop() {
-		if (!(this instanceof Train)) {
-			for (StopSign stop : stops) {
-				// cannot use train stop sign for non train vehicle
-				if (stop instanceof TrainStopSign) return false;
-			}
-		}
-		
-		if (!(this instanceof SkyTrain)) {
-			for (StopSign stop : stops) {
-				// cannot use sky train stop sign for non sky train vehicle
-				if (stop instanceof SkyTrainStopSign) return false;
-			}
-		}
-		
-		if (this instanceof Train) {
-			for (StopSign stop : stops) {
-				// train must use train stop sign
-				if (!(stop instanceof TrainStopSign)) return false;
-			}
-		}
-		
-		if (this instanceof SkyTrain) {
-			for (StopSign stop : stops) {
-				// sky train must use sky train stop sign
-				if (!(stop instanceof TrainStopSign)) return false;
-			}
-		}
-	}
-	*/
-	/*
-	public Vehicle(String vehicleName, String vehicleLicence, StopSign[] stops, 
-			double waitInterval, double averageSpeed,
-			int stopIndex, boolean forward,
-			String imagePath) {
-		
-		// set where which stop the bus is, and where it is heading
-		this.vehicleName = vehicleName;
-		this.vehicleLicence = vehicleLicence;
-		this.stops = stops;
-		this.waitInterval = waitInterval;
-		this.averageSpeed = averageSpeed;
-		this.speedVariance = 5.0;
-		this.imagePath = imagePath;
-		
-		this.currentStop = this.stops[stopIndex];
-		this.forward = forward;
-		this.iconWidth = 20;
-		this.iconHeight = 20;
-		
-		// prevent some weird situation Ex. Vehicle is at the first stop, but somehow going backward
-		if (stopIndex == 0) forward = true;
-		else if (stopIndex == stops.length - 1) forward = false;
-		
-		calculateStopDistance();
-		setNextStop();
-		setPostionFromCurrentStop();
-		setWaitingTime();
-		
-		currentSpeed = UsefulFunc.getCertainSizeVectorFromTwoPoints(position, nextStop.getPosition(), averageSpeed);
-		showRoute = true;
-		showVehicle = true;
-		
-		// create image
-		try {
-			vehicleImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
-	
 	protected void setWaitingTime() {
 		// only set if the bus is at the first or last stop
 		if (getStopIndex(currentStop) == 0 || getStopIndex(currentStop) == stops.length - 1) {
@@ -353,7 +280,7 @@ public abstract class Vehicle {
 	}
 	
 	// Calculate distance between the current stop(current stop of the vehicle) and the certain stop(the stop that we want to know the distance)
-	// KM ?
+	// KM
 	public double distanceToTargetStop(StopSign targetStop) {
 		int stopIndex = getStopIndex(targetStop);
 		int currentStopIndex = getStopIndex(currentStop);
@@ -499,11 +426,6 @@ public abstract class Vehicle {
 		}
 		
 		// only reset if it's close enough
-		/*
-		if (UsefulFunc.distanceBetweenTwoPoints(position, nextStop.getPosition()) <= averageSpeed*deltaTime) {
-			
-		}
-		*/
 		
 	}
 	

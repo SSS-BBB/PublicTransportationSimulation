@@ -12,14 +12,6 @@ public class NormalBus extends Vehicle {
 		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, "/icons/busIcon.png");
 		this.routeColor = Color.red;
 	}
-	
-	/*
-	public NormalBus(String vehicleName, String vehicleLicence, StopSign[] stops, 
-			double waitInterval, double averageSpeed,
-			int stopIndex, boolean forward) {
-		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, stopIndex, forward, "/icons/busIcon.png");
-	}
-	*/
 
 	@Override
 	public double fee(StopSign from, StopSign to) {
