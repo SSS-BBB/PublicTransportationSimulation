@@ -1,12 +1,7 @@
 package main_program;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.awt.event.*;
 import javax.swing.*;
 
 import maps.*;
@@ -80,21 +75,22 @@ public class BusStopDetailPanel extends JPanel  {
 		// Stop Sign Detail
 		JLabel stopNamelb = new JLabel(selectedStop.getStopName());
 		stopNamelb.setAlignmentX(CENTER_ALIGNMENT);
-		stopNamelb.setFont(new Font("Tahoma", Font.BOLD, 42));
+		stopNamelb.setFont(new Font(ProgramColorAndFont.PROGRAM_FONT, Font.BOLD, 42));
 		stopNamelb.setForeground(Color.white);
 		add(stopNamelb);
 		
 		JLabel stopIdlb = new JLabel(selectedStop.getStopID());
 		stopIdlb.setAlignmentX(CENTER_ALIGNMENT);
-		stopIdlb.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		stopIdlb.setFont(new Font(ProgramColorAndFont.PROGRAM_FONT, Font.PLAIN, 30));
 		stopIdlb.setForeground(Color.white);
 		add(stopIdlb);
 		
 		// For Debug Purpose
+		/*
 		JLabel stopPoslb = new JLabel(String.format("Bus Stop Position: (%.2f, %.2f)", selectedStop.getPosition()[0], selectedStop.getPosition()[1]));
 		stopPoslb.setAlignmentX(CENTER_ALIGNMENT);
 		add(stopPoslb);
-		// TODO: Remove this before deploy
+		*/
 		
 		add(Box.createRigidArea(new Dimension(0, 35)));
 		
@@ -125,10 +121,10 @@ public class BusStopDetailPanel extends JPanel  {
 	
 	public JPanel createVehiclePanel(Vehicle vehicle, int i) {
 		// Color
-		Color bgColor = ProgramColor.BLUE;
+		Color bgColor = ProgramColorAndFont.BLUE;
 		Color topicColor = Color.white;
 		Color subHeadingColor = Color.white;
-		Color detailColor = ProgramColor.LIGHT_GREEN;
+		Color detailColor = ProgramColorAndFont.LIGHT_GREEN;
 		
 		// Vehicle Container Panel (BoxLayout(X_AXIS))
 		JPanel containerPanel = new JPanel();
@@ -136,7 +132,7 @@ public class BusStopDetailPanel extends JPanel  {
 		containerPanel.setBackground(bgColor);
 		
 		// Border
-		containerPanel.setBorder(BorderFactory.createLineBorder(ProgramColor.LIGHT_BLUE, 2));
+		containerPanel.setBorder(BorderFactory.createLineBorder(ProgramColorAndFont.LIGHT_BLUE, 2));
 		
 		// Detail Panel
 		JPanel vehiclePanel = new JPanel();
@@ -145,9 +141,9 @@ public class BusStopDetailPanel extends JPanel  {
 		// vehiclePanel.setBackground(Color.blue);
 		
 		// Decorations
-		Font topicFont = new Font("Tahoma", Font.BOLD, 30); // font for vehicle name
-		Font subHeadingFont = new Font("Tahoma", Font.PLAIN, 18); // font for license, route
-		Font detailFont = new Font("Tahoma", Font.PLAIN, 14); // font for vehicle detail
+		Font topicFont = new Font(ProgramColorAndFont.PROGRAM_FONT, Font.BOLD, 30); // font for vehicle name
+		Font subHeadingFont = new Font(ProgramColorAndFont.PROGRAM_FONT, Font.PLAIN, 18); // font for license, route
+		Font detailFont = new Font(ProgramColorAndFont.PROGRAM_FONT, Font.PLAIN, 14); // font for vehicle detail
 		int margin = 5; // margin between components within the vehicle panel
 		int spacing = 15; // space to separate between group
 		

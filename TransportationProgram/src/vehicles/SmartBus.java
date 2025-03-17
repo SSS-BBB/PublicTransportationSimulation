@@ -2,7 +2,9 @@ package vehicles;
 
 import java.util.Random;
 
-import program_designs.ProgramColor;
+import javax.swing.JOptionPane;
+
+import program_designs.ProgramColorAndFont;
 import stops.SkyTrainStopSign;
 import stops.StopSign;
 import stops.TrainStopSign;
@@ -17,13 +19,12 @@ public class SmartBus extends AirConditionedVehicle {
 	public SmartBus(String vehicleName, String vehicleLicence, StopSign[] stops, double waitInterval,
 			double averageSpeed, double temperature) {
 		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/smartBusIcon.png");
-		// TODO: add image
 		Random rand = new Random();
 		this.maxPeopleOnBus = 40;
 		this.maxSeatAmount = 30;
 		this.peopleOnBus = rand.nextInt(maxPeopleOnBus + 1);
 		this.seatLeft = Math.max(0, maxSeatAmount - peopleOnBus);
-		this.routeColor = ProgramColor.DARK_BLUE;
+		this.routeColor = ProgramColorAndFont.DARK_BLUE;
 		setSpeedVariance(2.5);
 		
 		this.iconWidth = 22;
@@ -48,11 +49,11 @@ public class SmartBus extends AirConditionedVehicle {
 		// No subscription
 		int numberStation = numberOfStation(from, to);
 		if (numberStation == -1) {
-			// TODO: show error dialog
-			System.out.println("Cannot find " + from.getStopID() + " and/or " + to.getStopID());
+			JOptionPane.showMessageDialog(null, "Cannot find " + from.getStopID() + " and/or " + to.getStopID(), 
+					"Somethin went wrong!", JOptionPane.ERROR_MESSAGE);
 			return 0.0;	
 		}
-		int floor = (int) Math.ceil(numberStation / 4.0);
+		int floor = (int) Math.ceil(numberStation / 2.0);
 		if (floor == 0) return 0.0; // same from and to
 		
 		return 20.0 + floor*2.5;

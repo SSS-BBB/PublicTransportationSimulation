@@ -7,7 +7,7 @@ import javax.swing.plaf.ColorUIResource;
 
 import maps.*;
 import program_designs.ComponentDesign;
-import program_designs.ProgramColor;
+import program_designs.ProgramColorAndFont;
 
 public class MapSelectionPanel extends JPanel implements ActionListener {
 	
@@ -17,7 +17,7 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 	private JComboBox<String> mapSelectComboBox;
 	
 	public MapSelectionPanel(MapSelectionFrame selectFrame) {
-		UIManager.put("ComboBox.selectionBackground", new ColorUIResource(ProgramColor.SELECTED_DROPDOWN));
+		UIManager.put("ComboBox.selectionBackground", new ColorUIResource(ProgramColorAndFont.SELECTED_DROPDOWN));
 		
 		// Attributes setting
 		this.selectFrame = selectFrame;
@@ -36,7 +36,7 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 		// Components
 		JLabel selectMapLb = new JLabel("Select Map");
 		selectMapLb.setAlignmentX(CENTER_ALIGNMENT);
-		selectMapLb.setFont(new Font("Tahoma", Font.BOLD, 50));
+		selectMapLb.setFont(new Font(ProgramColorAndFont.PROGRAM_FONT, Font.BOLD, 50));
 		selectMapLb.setForeground(Color.white);
 		add(selectMapLb);
 		add(Box.createRigidArea(new Dimension(0, margin)));
@@ -44,9 +44,9 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 		mapSelectComboBox = new JComboBox<>(MapList.getMapNameList());
 		mapSelectComboBox.setPreferredSize(new Dimension(280, 55));
 		mapSelectComboBox.setMaximumSize(mapSelectComboBox.getPreferredSize());
-		mapSelectComboBox.setBackground(ProgramColor.DROPDOWN_BACKGROUND);
+		mapSelectComboBox.setBackground(ProgramColorAndFont.DROPDOWN_BACKGROUND);
 		mapSelectComboBox.setForeground(Color.black);
-		mapSelectComboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		mapSelectComboBox.setFont(new Font(ProgramColorAndFont.PROGRAM_FONT, Font.PLAIN, 16));
 		mapSelectComboBox.setFocusable(false);
 		add(mapSelectComboBox);
 		add(Box.createRigidArea(new Dimension(0, spacing)));
@@ -80,8 +80,8 @@ public class MapSelectionPanel extends JPanel implements ActionListener {
 		int width = getWidth();
 		int height = getHeight();
 		
-		Color color1 = ProgramColor.DARK_BLUE;
-		Color color2 = ProgramColor.LIGHT_GREEN;
+		Color color1 = ProgramColorAndFont.DARK_BLUE;
+		Color color2 = ProgramColorAndFont.LIGHT_GREEN;
 		GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
 		g2d.setPaint(gp);
 		g2d.fillRect(0, 0, width, height);

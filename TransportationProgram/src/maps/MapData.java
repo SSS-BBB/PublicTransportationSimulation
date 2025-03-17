@@ -1,7 +1,6 @@
 package maps;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import stops.StopSign;
 import vehicles.*;

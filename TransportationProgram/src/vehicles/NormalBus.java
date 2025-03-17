@@ -2,7 +2,6 @@ package vehicles;
 
 import java.awt.Color;
 
-import program_designs.ProgramColor;
 import stops.SkyTrainStopSign;
 import stops.StopSign;
 import stops.TrainStopSign;

@@ -1,6 +1,8 @@
 package vehicles;
 
-import program_designs.ProgramColor;
+import javax.swing.JOptionPane;
+
+import program_designs.ProgramColorAndFont;
 import stops.*;
 
 public class AirConditionedBus extends AirConditionedVehicle {
@@ -9,7 +11,7 @@ public class AirConditionedBus extends AirConditionedVehicle {
 			double averageSpeed, double temperature) {
 		super(vehicleName, vehicleLicence, stops, waitInterval, averageSpeed, temperature, "/icons/airConditionedBusIcon.png");
 		setSpeedVariance(4.0);
-		this.routeColor = ProgramColor.LIGHT_BLUE;
+		this.routeColor = ProgramColorAndFont.LIGHT_BLUE;
 		
 		this.iconWidth = 27;
 		this.iconHeight = 27;
@@ -19,11 +21,11 @@ public class AirConditionedBus extends AirConditionedVehicle {
 	public double fee(StopSign from, StopSign to) {
 		int numberStation = numberOfStation(from, to);
 		if (numberStation == -1) {
-			// TODO: show error dialog
-			System.out.println("Cannot find " + from.getStopID() + " and/or " + to.getStopID());
+			JOptionPane.showMessageDialog(null, "Cannot find " + from.getStopID() + " and/or " + to.getStopID(), 
+					"Somethin went wrong!", JOptionPane.ERROR_MESSAGE);
 			return -1.0;	
 		}
-		int floor = (int) Math.ceil(numberStation / 4.0);
+		int floor = (int) Math.ceil(numberStation / 2.0);
 		if (floor == 0) return 0.0; // same from and to
 		
 		return 10.0 + floor*2.0;

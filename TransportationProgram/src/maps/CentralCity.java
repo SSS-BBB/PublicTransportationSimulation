@@ -36,11 +36,11 @@ public class CentralCity extends MapData {
 					new StopSign("Anfield", "A19", new double[] { 947, 611 }),
 					new StopSign("London", "A20", new double[] { 1132, 650 }),
 					new StopSign("White Heart Lane", "A21", new double[] { 1425, 657 }),
-					new StopSign("Elegant Restaurant", "A22", new double[] { 1630, 678 }),
+					new StopSign("Donmu", "A22", new double[] { 1630, 678 }),
 					
-					new StopSign("Luxurious Fashion Store", "A23", new double[] { 214, 594 }),
-					new StopSign("Nong Beung Town Hall", "A24", new double[] { 414, 674 }),
-					new StopSign("Nakorn Bridge", "A25", new double[] { 714, 668 })
+					new StopSign("Silala", "A23", new double[] { 214, 594 }),
+					new StopSign("Phutsai", "A24", new double[] { 414, 674 }),
+					new StopSign("Fida", "A25", new double[] { 714, 668 })
 			};
 			
 			scalePixelToKm(new double[] { 120, 120 });

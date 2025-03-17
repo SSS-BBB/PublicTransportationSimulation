@@ -1,17 +1,7 @@
 package main_program;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import maps.*;
@@ -29,9 +19,9 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 	
 	private Color bgColor, topicColor, subHeadingColor, detailColor;
 	
-	private JLabel namelb, licenselb, showRoutelb, showVehiclelb, feelb;
-	private JButton showRouteToggleBtn, showVehicleToggleBtn, backBtn, calculateFeeBtn, vehicleBtn; // TODO: decorate button
-	private JComboBox<String> fromCombo, toCombo;
+	private JLabel namelb, licenselb, showVehiclelb, feelb;
+	private JButton showVehicleToggleBtn, backBtn, calculateFeeBtn, vehicleBtn; // TODO: decorate button
+	private JComboBox<String> toCombo;
 	
 	private boolean smartBusMember;
 	
@@ -57,7 +47,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		}
 		
 		// Background
-		setBackground(ProgramColor.DARK_BLUE);
+		setBackground(ProgramColorAndFont.DARK_BLUE);
 		
 		// Layout
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -79,20 +69,20 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		backBtnContainer.add(backBtn);
 		backBtnContainer.add(Box.createHorizontalGlue());
-		backBtnContainer.setBackground(ProgramColor.DARK_BLUE);
+		backBtnContainer.setBackground(ProgramColorAndFont.DARK_BLUE);
 		add(backBtnContainer);
 		add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		// Colors
-		bgColor = ProgramColor.BLUE;
+		bgColor = ProgramColorAndFont.BLUE;
 		topicColor = Color.white;
 		subHeadingColor = Color.white;
-		detailColor = ProgramColor.LIGHT_GREEN;
+		detailColor = ProgramColorAndFont.LIGHT_GREEN;
 		
 		// Vehicle Setting Details Container
 		JPanel xBoxContainer = new JPanel();
 		xBoxContainer.setLayout(new BoxLayout(xBoxContainer, BoxLayout.X_AXIS));
-		xBoxContainer.setBorder(BorderFactory.createLineBorder(ProgramColor.LIGHT_BLUE, 2));
+		xBoxContainer.setBorder(BorderFactory.createLineBorder(ProgramColorAndFont.LIGHT_BLUE, 2));
 		xBoxContainer.setBackground(bgColor);
 		
 		JPanel vehicleSettingContainer = new JPanel();
@@ -106,9 +96,9 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		int spacing = 30; // space to separate group of components
 		
 		// Fonts
-		Font topicFont = new Font("Tahoma", Font.BOLD, 36); // font for vehicle name
-		Font subHeadingFont = new Font("Tahoma", Font.PLAIN, 24); // font for license
-		Font detailFont = new Font("Tahoma", Font.PLAIN, 14); // font for vehicle detail
+		Font topicFont = new Font(ProgramColorAndFont.PROGRAM_FONT, Font.BOLD, 36); // font for vehicle name
+		Font subHeadingFont = new Font(ProgramColorAndFont.PROGRAM_FONT, Font.PLAIN, 24); // font for license
+		Font detailFont = new Font(ProgramColorAndFont.PROGRAM_FONT, Font.PLAIN, 14); // font for vehicle detail
 		
 		namelb = new JLabel(selectedVehicle.getVehicleName());
 		namelb.setAlignmentX(CENTER_ALIGNMENT);
@@ -158,8 +148,8 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 		toCombo = new JComboBox<>(stopList);
 		toCombo.setPreferredSize(new Dimension(150, 30));
 		toCombo.setMaximumSize(toCombo.getPreferredSize());
-		toCombo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		toCombo.setBackground(ProgramColor.DROPDOWN_BACKGROUND);
+		toCombo.setFont(new Font(ProgramColorAndFont.PROGRAM_FONT, Font.PLAIN, 12));
+		toCombo.setBackground(ProgramColorAndFont.DROPDOWN_BACKGROUND);
 		toCombo.setForeground(Color.black);
 		toCombo.setBorder(BorderFactory.createEmptyBorder());
 		toCombo.setFont(detailFont);
@@ -281,7 +271,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 			
 			if (selectedVehicle == null)
 			{
-				// TODO: Show Error Dialog That says something went wrong!
+				
 				System.out.println("Cannot find " + selectedVehicle.getVehicleLicence());
 				return;
 			}
@@ -301,8 +291,8 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 			
 			if (selectedVehicle == null)
 			{
-				// TODO: Show Error Dialog That says something went wrong!
-				System.out.println("Cannot find " + selectedVehicle.getVehicleLicence());
+				JOptionPane.showMessageDialog(null, "Somethin went wrong!", 
+						"Null Selected Vehicle", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 				

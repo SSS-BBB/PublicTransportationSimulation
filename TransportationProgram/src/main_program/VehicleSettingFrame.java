@@ -25,6 +25,7 @@ public class VehicleSettingFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600, 800);
 		setLocationRelativeTo(null);
+		setTitle(selectedVehicle.getVehicleName());
 		
 		// Set Panel
 		VehicleSettingPanel vPanel = new VehicleSettingPanel(this, map, selectedVehicle, selectedStop);

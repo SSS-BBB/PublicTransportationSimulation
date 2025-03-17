@@ -3,7 +3,6 @@ package main_program;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import maps.*;
 import stops.StopSign;
 import useful.*;
 
@@ -59,25 +58,25 @@ public class MapClickListener implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

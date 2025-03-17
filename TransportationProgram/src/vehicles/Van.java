@@ -2,6 +2,8 @@ package vehicles;
 
 import java.awt.Color;
 
+import javax.swing.JOptionPane;
+
 import stops.*;
 
 public class Van extends AirConditionedVehicle {
@@ -20,11 +22,11 @@ public class Van extends AirConditionedVehicle {
 	public double fee(StopSign from, StopSign to) {
 		int numberStation = numberOfStation(from, to);
 		if (numberStation == -1) {
-			// TODO: show error dialog
-			System.out.println("Cannot find " + from.getStopID() + " and/or " + to.getStopID());
+			JOptionPane.showMessageDialog(null, "Cannot find " + from.getStopID() + " and/or " + to.getStopID(), 
+					"Somethin went wrong!", JOptionPane.ERROR_MESSAGE);
 			return -1.0;	
 		}
-		int floor = (int) Math.ceil(numberStation / 4.0);
+		int floor = (int) Math.ceil(numberStation / 2.0);
 		if (floor == 0) return 0.0; // same from and to
 		
 		return 15.0 + floor*3.0;

@@ -4,25 +4,18 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import maps.*;
-import program_designs.*;
 import vehicles.*;
 import stops.*;
 
 public class BusStopDetailFrame extends JFrame {
-	private MapData map;
-	private Vehicle[] vehicleList;
-	private StopSign selectedStop;
 	
 	public BusStopDetailFrame(MapData map, Vehicle[] vehicleList, StopSign selectedStop) {
-		// Value settings
-		this.map = map;
-		this.vehicleList = vehicleList;
-		this.selectedStop = selectedStop;
 		
 		// Frame default settings
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600, 800);
 		setLocationRelativeTo(null);
+		setTitle(selectedStop.getStopName());
 		
 		// Set Panel
 		BusStopDetailPanel busStopPanel = new BusStopDetailPanel(this, map, vehicleList, selectedStop);

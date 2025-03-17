@@ -4,15 +4,11 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.*;
-import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import maps.MapData;
-import program_designs.ProgramColor;
+import program_designs.ProgramColorAndFont;
 import stops.StopSign;
 import vehicles.Vehicle;
 
@@ -52,8 +48,6 @@ public class MapPanel extends JPanel implements Runnable {
 		while (loop != null && !loopStop) {
 			map.updateData();
 			
-			System.out.println("Map Loop!");
-			
 			repaint();
 			
 			try {
@@ -73,8 +67,8 @@ public class MapPanel extends JPanel implements Runnable {
 		int width = getWidth();
 		int height = getHeight();
 				
-		Color color1 = ProgramColor.DARK_BLUE;
-		Color color2 = ProgramColor.BLUE;
+		Color color1 = ProgramColorAndFont.DARK_BLUE;
+		Color color2 = ProgramColorAndFont.BLUE;
 		GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
 		g2d.setPaint(gp);
 		g2d.fillRect(0, 0, width, height);
@@ -141,7 +135,7 @@ public class MapPanel extends JPanel implements Runnable {
 						stopSignArray[i].getIconWidth(), stopSignArray[i].getIconHeight());
 			}
 			else {
-				g2d.setColor(ProgramColor.LIGHT_GREEN);
+				g2d.setColor(ProgramColorAndFont.LIGHT_GREEN);
 				
 				// drawing at center
 				g2d.setColor(Color.black);
@@ -186,7 +180,7 @@ public class MapPanel extends JPanel implements Runnable {
 					// g2d.drawImage(vehicle.getVehicleImage(), posX, posY, 20, 20, null);				
 				}
 				else {
-					g2d.setColor(ProgramColor.BLUE);
+					g2d.setColor(ProgramColorAndFont.BLUE);
 					drawRectAtCenter(g2d, posX, posY, 20, 20);
 					// g2d.fillRect(posX, posY, 20, 20);
 				}
