@@ -3,11 +3,11 @@ package maps;
 import stops.*;
 import vehicles.*;
 
-public class VehiclesTestMap extends MapData {
+public class OldYork extends MapData {
 	
-	public VehiclesTestMap() {
+	public OldYork() {
 		// Attributes setting
-		mapName = "Vehicles Test Map";
+		mapName = "Old York";
 		mapScale = 20;
 		
 		// stops
@@ -74,12 +74,28 @@ public class VehiclesTestMap extends MapData {
 		
 		// vehicles
 		vehicles = new Vehicle[] {
-				new MiniBus("Mini Bus", "ABC 023", miniBusStop, 3.0, 70.0),
-				new Van("Van", "VAN 69", vanStop, 3.5, 50.0, 25.0),
-				new Train("Train", "TRA 042", trainStop, 0.5, 80.0),
-				new SkyTrain("Sky Train", "STA 056", skyTrainStop, 0.33, 90.0, 24.0),
-				new AirConditionedBus("Air Bus", "ABS 880", airConditionedBusStop, 1.0, 65.0, 25.0),
-				new SmartBus("Smart Bus", "SBS 900", smartBusStop, 0.7, 68.0, 24.0)
+				new MiniBus("Mini Bus - 850", "ABC 023", miniBusStop, 3.0, 70.0),
+				new MiniBus("Mini Bus - 850", "OWU 362", miniBusStop, 3.0, 70.0),
+				new MiniBus("Mini Bus - 850", "PWL 837", miniBusStop, 3.0, 70.0),
+				
+				new Van("Van - 135", "VAN 69", vanStop, 3.5, 50.0, 25.0),
+				new Van("Van - 135", "BWC 8754", vanStop, 3.5, 50.0, 25.0),
+				new Van("Van - 135", "PU 23050", vanStop, 3.5, 50.0, 25.0),
+				
+				new Train("Train - 756", "TRA 042", trainStop, 0.5, 80.0),
+				new Train("Train - 756", "DQR 121", trainStop, 0.5, 80.0),
+				
+				new SkyTrain("Blue Sky Train", "STA 056", skyTrainStop, 0.33, 90.0, 24.0),
+				new SkyTrain("Blue Sky Train", "8873PXX", skyTrainStop, 0.33, 90.0, 24.0),
+				new SkyTrain("Blue Sky Train", "QWO 1213", skyTrainStop, 0.33, 90.0, 24.0),
+				
+				new AirConditionedBus("Air Bus - 418", "ABS 880", airConditionedBusStop, 1.0, 65.0, 25.0),
+				new AirConditionedBus("Air Bus - 418", "QLF 044", airConditionedBusStop, 1.0, 65.0, 25.0),
+				new AirConditionedBus("Air Bus - 418", "XDW 893", airConditionedBusStop, 1.0, 65.0, 25.0),
+				new AirConditionedBus("Air Bus - 418", "IKO 689", airConditionedBusStop, 1.0, 65.0, 25.0),
+				
+				new SmartBus("Smart Bus - 391", "SBS 900", smartBusStop, 0.7, 68.0, 24.0),
+				new SmartBus("Smart Bus - 391", "SUR 1574", smartBusStop, 0.7, 68.0, 24.0),
 		};
 		
 		setStopSign(new StopSign[][] { 

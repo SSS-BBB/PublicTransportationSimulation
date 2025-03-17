@@ -4,8 +4,8 @@ package maps;
 public class MapList {
 	
 	public static MapData[] mapList = new MapData[] { 
-			new KlongNongBeung(),
-			new VehiclesTestMap(), new TestMap() , new TestMap2()
+			new LadKrapao(), new CentralCity(), new KlongNongBeung(),
+			new OldYork()
 			};
 	
 	public static String[] getMapNameList() {
