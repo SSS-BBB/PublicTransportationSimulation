@@ -121,7 +121,7 @@ public class MapData {
 			else {
 				// don't show this vehicle on the map
 				vehicle.updateShowVehicleStatus(false);
-				// vehicle.updateShowRouteStatus(false);
+				vehicle.updateShowRouteStatus(false);
 			}
 		}
 	}
