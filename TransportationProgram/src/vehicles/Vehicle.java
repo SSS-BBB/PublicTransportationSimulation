@@ -385,12 +385,16 @@ public abstract class Vehicle {
 	public void update(double deltaTime) {
 		
 		// check if the vehicle is waiting
-		double t = deltaTime;
+		double t = 0.0;
 		if (waiting > 0) {
 			if (waiting - deltaTime <= 0) {
 				waiting = 0;
 				t += Math.abs(waiting - deltaTime);
 			}
+			waiting -= deltaTime;
+		}
+		else {
+			t = deltaTime;
 		}
 		
 		// update speed
@@ -430,6 +434,12 @@ public abstract class Vehicle {
 	}
 	
 	protected void onUpdateCurrentStop() {
+		if (getStopIndex(currentStop) == 0 || getStopIndex(currentStop) == stops.length - 1)
+		{
+			waiting = waitInterval;
+			return;
+		}
+		
 		// when current stop is updated
 		waiting = stationWait;
 	}

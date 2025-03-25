@@ -19,6 +19,9 @@ public class MiniBus extends Vehicle {
 
 	@Override
 	public double fee(StopSign from, StopSign to) {
+		if (from.getStopID().equals(to.getStopID()))
+			return 0; // same stop selected
+		
 		return 8.0;
 	}
 	
