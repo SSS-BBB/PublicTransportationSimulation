@@ -52,30 +52,30 @@ public class LadKrapao extends MapData {
 				// Train
 				new Train("TM Train - 128", "TTT 7879", 
 						getStopsFromIndex(new int[] { 0, 1, 2, 3, 4, 5 }),
-						3.0, 40.0),
+						1.75, 40.0),
 				new Train("TM Train - 128", "NPN 390", 
 						getStopsFromIndex(new int[] { 0, 1, 2, 3, 4, 5 }),
-						3.0, 40.0),
+						1.75, 40.0),
 				
 				// Smart bus
 				// 369
 				new SmartBus("Smart Bus - 369", "HGB 714",
 						getStopsFromIndex(new int[] { 6, 7, 8, 9, 10, 11, 12 }),
-						1.5, 35.0, 24.0),
+						1.0, 35.0, 24.0),
 				new SmartBus("Smart Bus - 369", "NRP 581",
 						getStopsFromIndex(new int[] { 6, 7, 8, 9, 10, 11, 12 }),
-						1.5, 35.0, 24.0),
+						1.0, 35.0, 24.0),
 				new SmartBus("Smart Bus - 369", "YGL 205",
 						getStopsFromIndex(new int[] { 6, 7, 8, 9, 10, 11, 12 }),
-						1.5, 35.0, 24.0),
+						1.0, 35.0, 24.0),
 				
 				// 168
 				new SmartBus("Smart Bus - 168", "MFM 410",
 						getStopsFromIndex(new int[] { 13, 14, 15, 16, 17, 18, 6 }),
-						1.5, 35.0, 24.0),
+						1.0, 35.0, 24.0),
 				new SmartBus("Smart Bus - 168", "MFQ 173",
 						getStopsFromIndex(new int[] { 13, 14, 15, 16, 17, 18, 6 }),
-						1.5, 35.0, 24.0),
+						1.0, 35.0, 24.0),
 				
 				// Van
 				// 983
@@ -92,11 +92,11 @@ public class LadKrapao extends MapData {
 				// BTS
 				new SkyTrain("Yellow Sky Train", "ATA 128", 
 						getStopsFromIndex(new int[] { 23, 24, 25, 26, 27, 28}),
-						1.0, 50.0, 24.0
+						0.8, 50.0, 24.0
 						),
 				new SkyTrain("Yellow Sky Train", "KMITL 67", 
 						getStopsFromIndex(new int[] { 23, 24, 25, 26, 27, 28}),
-						1.0, 50.0, 24.0
+						0.8, 50.0, 24.0
 						)
 				
 		};

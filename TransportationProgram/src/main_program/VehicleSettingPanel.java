@@ -20,7 +20,7 @@ public class VehicleSettingPanel extends JPanel implements ActionListener {
 	private Color bgColor, topicColor, subHeadingColor, detailColor;
 	
 	private JLabel namelb, licenselb, showVehiclelb, feelb;
-	private JButton showVehicleToggleBtn, backBtn, calculateFeeBtn, vehicleBtn; // TODO: decorate button
+	private JButton showVehicleToggleBtn, backBtn, calculateFeeBtn, vehicleBtn;
 	private JComboBox<String> toCombo;
 	
 	private boolean smartBusMember;

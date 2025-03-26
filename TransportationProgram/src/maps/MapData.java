@@ -104,6 +104,7 @@ public class MapData {
 		for (Vehicle vehicle : vehicles) {
 			if (vehicle.getVehicleLicence().equals(vehicleLicense)) {
 				vehicle.updateShowVehicleStatus(!vehicle.doShowVehicle()); // toggle true -> false, false -> true
+				vehicle.updateShowRouteStatus(!vehicle.doShowRoute()); // toggle true -> false, false -> true
 				return vehicle;
 			}
 		}

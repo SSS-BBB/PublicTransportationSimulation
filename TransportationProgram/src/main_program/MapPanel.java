@@ -51,7 +51,7 @@ public class MapPanel extends JPanel implements Runnable {
 			repaint();
 			
 			try {
-                Thread.sleep(500); // 1000 ms = 1 s
+                Thread.sleep(250); // 1000 ms = 1 s
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
