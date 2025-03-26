@@ -28,7 +28,7 @@ public class AirConditionedBus extends AirConditionedVehicle {
 		int floor = (int) Math.ceil(numberStation / 2.0);
 		if (floor == 0) return 0.0; // same from and to
 		
-		return 10.0 + floor*2.0;
+		return 8.0 + floor*2.0;
 	}
 
 	@Override

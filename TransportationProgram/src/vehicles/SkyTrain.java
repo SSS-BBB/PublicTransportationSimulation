@@ -22,7 +22,7 @@ public class SkyTrain extends AirConditionedVehicle {
 		}
 		int floor = (int) Math.ceil(numberStation / 1.0);
 		if (floor == 0) return 0.0; // same from and to
-		return 20.0 + floor*4.0;
+		return 16.0 + floor*4.0;
 	}
 	@Override
 	public boolean validStop() {

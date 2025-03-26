@@ -22,7 +22,7 @@ public class Train extends Vehicle {
 		}
 		int floor = (int) Math.ceil(numberStation / 3.0);
 		if (floor == 0) return 0.0; // same from and to
-		return 5.0 + floor*1.0;
+		return 4.0 + floor*1.0;
 	}
 	@Override
 	public boolean validStop() {

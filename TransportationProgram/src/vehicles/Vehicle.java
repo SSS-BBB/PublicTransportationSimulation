@@ -343,7 +343,7 @@ public abstract class Vehicle {
 		return Math.abs(toIndex - fromIndex);
 	}
 	
-	// Hour ??
+	// Return hour but show in minutes
 	public double getEstimatedTime(StopSign stop) {
 		double time = distanceToTargetStop(stop) / averageSpeed;
 		

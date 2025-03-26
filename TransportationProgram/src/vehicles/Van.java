@@ -21,7 +21,7 @@ public class Van extends AirConditionedVehicle {
 		}
 		int floor = (int) Math.ceil(numberStation / 2.0);
 		if (floor == 0) return 0.0; // same from and to
-		return 15.0 + floor*3.0;
+		return 12.0 + floor*3.0;
 	}
 	@Override
 	public boolean validStop() {

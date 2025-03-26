@@ -56,7 +56,7 @@ public class SmartBus extends AirConditionedVehicle {
 		int floor = (int) Math.ceil(numberStation / 2.0);
 		if (floor == 0) return 0.0; // same from and to
 		
-		return 20.0 + floor*2.5;
+		return 17.5 + floor*2.5;
 	}
 	
 	public double subsriptionFee(StopSign from, StopSign to) {
